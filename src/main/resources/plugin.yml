@@ -1,0 +1,4 @@
+name: JinroCraft
+version: 1.0.0
+main: net.atlantis.jinrocraft.JinroCraft
+api-version: 1.16
