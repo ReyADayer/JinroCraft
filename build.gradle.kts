@@ -9,6 +9,7 @@ group = "net.atlantis"
 version = "1.0.0"
 
 repositories {
+    jcenter()
     mavenCentral()
     maven(Dependencies.Spigot.repository)
     maven(Dependencies.SonaType.repository)
@@ -19,6 +20,7 @@ dependencies {
     compile(Dependencies.Kotlin.stdlib)
     compile(Dependencies.Kotlin.reflect)
     compile(Dependencies.Rx.java)
+    compile(Dependencies.Koin.core)
 }
 
 buildscript {
@@ -27,6 +29,7 @@ buildscript {
     }
     dependencies {
         classpath(Dependencies.Kotlin.classpath)
+        classpath(Dependencies.Koin.classpath)
     }
 }
 
