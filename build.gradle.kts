@@ -21,6 +21,7 @@ dependencies {
     compile(Dependencies.Kotlin.reflect)
     compile(Dependencies.Rx.java)
     compile(Dependencies.Koin.core)
+    compile(Dependencies.Koin.coreExt)
 }
 
 buildscript {

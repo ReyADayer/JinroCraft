@@ -29,5 +29,6 @@ object Dependencies {
         val version = "2.1.6"
         val classpath = "org.koin:koin-gradle-plugin:$version"
         val core = "org.koin:koin-core:$version"
+        val coreExt = "org.koin:koin-core-ext:$version"
     }
 }

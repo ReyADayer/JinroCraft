@@ -2,3 +2,14 @@ name: JinroCraft
 version: 1.0.0
 main: net.atlantis.jinrocraft.JinroCraft
 api-version: 1.16
+
+commands:
+  role:
+    description: role command
+    usage: /<command>
+    permission: JinroCraft.admin
+    permission-message: You don't have <permission>
+permissions:
+  JinroCraft.admin:
+    description: Gives access to Artillery admin commands
+    default: op
