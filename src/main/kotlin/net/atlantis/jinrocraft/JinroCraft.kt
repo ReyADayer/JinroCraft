@@ -8,6 +8,8 @@ import org.koin.dsl.module
 
 class JinroCraft : JavaPlugin() {
     override fun onEnable() {
+        saveDefaultConfig()
+
         setupKoin()
 
         initCommand("role", RoleCommand())

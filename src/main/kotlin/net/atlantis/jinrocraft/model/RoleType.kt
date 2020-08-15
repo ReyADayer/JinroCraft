@@ -10,7 +10,7 @@ enum class RoleType(val key: String, val jpName: String, val groupType: GroupTyp
     FOX("Fox", "妖狐", GroupType.FOXES);
 
     companion object {
-        fun findByKey(key: String): RoleType? {
+        fun findByKey(key: String?): RoleType? {
             return values().firstOrNull { it.key == key }
         }
     }
