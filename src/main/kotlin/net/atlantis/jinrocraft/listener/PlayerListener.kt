@@ -1,12 +1,17 @@
 package net.atlantis.jinrocraft.listener
 
-import net.atlantis.jinrocraft.model.Role
+import net.atlantis.jinrocraft.model.RoleService
+import net.atlantis.jinrocraft.model.RoleType
 import net.atlantis.jinrocraft.model.npc.Grave
+import net.atlantis.jinrocraft.model.role.Medium
+import net.atlantis.jinrocraft.model.role.Seer
+import org.bukkit.ChatColor
 import org.bukkit.GameMode
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.AsyncPlayerChatEvent
+import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.plugin.java.JavaPlugin
@@ -19,13 +24,13 @@ class PlayerListener : Listener, KoinComponent {
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
         val player = event.player
-        Role().initRole(player)
+        RoleService().initRole(player)
     }
 
     @EventHandler
     fun onDeath(event: PlayerDeathEvent) {
         val player = event.entity
-        event.deathMessage = "${player}が襲撃されました"
+        event.deathMessage = "${ChatColor.RED}${player.name}が襲撃されました"
         Grave().create(player.location, player)
     }
 
@@ -40,6 +45,21 @@ class PlayerListener : Listener, KoinComponent {
         val player = event.player
         if (player.gameMode == GameMode.SPECTATOR) {
             event.isCancelled = true
+        }
+    }
+
+    @EventHandler
+    fun onClick(event: PlayerInteractAtEntityEvent) {
+        val player = event.player
+        val clickedEntity = event.rightClicked
+        val roleType = RoleService().getRole(player)
+        when (roleType) {
+            RoleType.SEER -> {
+                Seer().onClickedEntity(player, clickedEntity)
+            }
+            RoleType.MEDIUM -> {
+                Medium().onClickedEntity(player, clickedEntity)
+            }
         }
     }
 }

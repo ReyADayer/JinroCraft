@@ -4,12 +4,12 @@ import net.atlantis.jinrocraft.ext.getStringMetadata
 import net.atlantis.jinrocraft.ext.setStringMetadata
 import net.atlantis.jinrocraft.metadata.MetadataKey
 import org.bukkit.configuration.file.FileConfiguration
-import org.bukkit.entity.Player
+import org.bukkit.entity.Entity
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class Role : KoinComponent {
+class RoleService : KoinComponent {
     companion object {
         private const val CONFIG_ROLE_KEY = "role"
     }
@@ -21,34 +21,34 @@ class Role : KoinComponent {
         config.set(CONFIG_ROLE_KEY, null)
     }
 
-    fun initRole(player: Player) {
+    fun initRole(entity: Entity) {
         val config: FileConfiguration = plugin.config
-        val roleTypeKey = config.getString(getConfigRoleKey(player))
+        val roleTypeKey = config.getString(getConfigRoleKey(entity))
         val roleType = RoleType.findByKey(roleTypeKey)
         if (roleType == null) {
             // 存在しないときは市民に設定する
-            setRole(player, RoleType.CITIZEN)
+            setRole(entity, RoleType.CITIZEN)
         } else {
-            player.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
+            entity.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
         }
     }
 
-    fun getRole(player: Player): RoleType? {
-        val roleTypeKey = player.getStringMetadata(MetadataKey.ROLE.key) ?: return null
+    fun getRole(entity: Entity): RoleType? {
+        val roleTypeKey = entity.getStringMetadata(MetadataKey.ROLE.key) ?: return null
         return RoleType.findByKey(roleTypeKey)
     }
 
-    fun setRole(player: Player, roleTypeKey: String) {
+    fun setRole(entity: Entity, roleTypeKey: String) {
         val roleType = RoleType.findByKey(roleTypeKey) ?: return
-        setRole(player, roleType)
+        setRole(entity, roleType)
     }
 
-    fun setRole(player: Player, roleType: RoleType) {
+    fun setRole(entity: Entity, roleType: RoleType) {
         val config: FileConfiguration = plugin.config
-        config.set(getConfigRoleKey(player), roleType.key)
-        player.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
+        config.set(getConfigRoleKey(entity), roleType.key)
+        entity.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
         plugin.saveConfig()
     }
 
-    private fun getConfigRoleKey(player: Player): String = "$CONFIG_ROLE_KEY.${player.uniqueId}"
+    private fun getConfigRoleKey(player: Entity): String = "$CONFIG_ROLE_KEY.${player.uniqueId}"
 }
