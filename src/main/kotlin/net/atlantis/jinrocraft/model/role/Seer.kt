@@ -6,6 +6,7 @@ import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
+import org.bukkit.event.entity.EntityDamageByEntityEvent
 
 class Seer : Role() {
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
@@ -26,7 +27,7 @@ class Seer : Role() {
         }
     }
 
-    override fun onAttackedEntity(player: Player, targetEntity: Entity) {
+    override fun onAttackedEntity(player: Player, targetEntity: Entity, event: EntityDamageByEntityEvent) {
         // 攻撃時の特殊能力は無し
     }
 }

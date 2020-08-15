@@ -9,6 +9,7 @@ import org.bukkit.Material
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
+import org.bukkit.event.entity.EntityDamageByEntityEvent
 
 class Medium : Role() {
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
@@ -25,6 +26,6 @@ class Medium : Role() {
         }
     }
 
-    override fun onAttackedEntity(player: Player, targetEntity: Entity) {
+    override fun onAttackedEntity(player: Player, targetEntity: Entity, event: EntityDamageByEntityEvent) {
     }
 }

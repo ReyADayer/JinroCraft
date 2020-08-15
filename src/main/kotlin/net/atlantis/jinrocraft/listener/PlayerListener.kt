@@ -5,10 +5,13 @@ import net.atlantis.jinrocraft.model.RoleType
 import net.atlantis.jinrocraft.model.npc.Grave
 import net.atlantis.jinrocraft.model.role.Medium
 import net.atlantis.jinrocraft.model.role.Seer
+import net.atlantis.jinrocraft.model.role.Werewolf
 import org.bukkit.ChatColor
 import org.bukkit.GameMode
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
@@ -59,6 +62,20 @@ class PlayerListener : Listener, KoinComponent {
             }
             RoleType.MEDIUM -> {
                 Medium().onClickedEntity(player, clickedEntity)
+            }
+        }
+    }
+
+    @EventHandler
+    fun onAttack(event: EntityDamageByEntityEvent) {
+        val attacker = event.damager
+        if (attacker is Player) {
+            val defender = event.entity
+            val roleType = RoleService().getRole(attacker)
+            when (roleType) {
+                RoleType.WEREWOLF -> {
+                    Werewolf().onAttackedEntity(attacker, defender, event)
+                }
             }
         }
     }
