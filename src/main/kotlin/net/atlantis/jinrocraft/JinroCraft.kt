@@ -1,6 +1,7 @@
 package net.atlantis.jinrocraft
 
 import net.atlantis.jinrocraft.command.RoleCommand
+import net.atlantis.jinrocraft.command.StatusCommand
 import net.atlantis.jinrocraft.ext.initCommand
 import net.atlantis.jinrocraft.ext.registerListener
 import net.atlantis.jinrocraft.listener.PlayerListener
@@ -16,6 +17,7 @@ class JinroCraft : JavaPlugin() {
 
         registerListener(PlayerListener())
 
+        initCommand("status", StatusCommand())
         initCommand("role", RoleCommand())
     }
 
