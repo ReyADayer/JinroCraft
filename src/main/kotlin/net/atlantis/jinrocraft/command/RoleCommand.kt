@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft.command
 
+import net.atlantis.jinrocraft.model.Role
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -15,7 +16,12 @@ class RoleCommand : BaseCommand() {
                 val selectedPlayerName = args[1] ?: return false
                 val selectedPlayer = plugin.server.getPlayer(selectedPlayerName) ?: return false
                 plugin.server.broadcastMessage(selectedPlayer.uniqueId.toString())
-                // TODO : ロールセットの処理
+                val roleTypeKey = args[2] ?: return false
+                Role().setRole(selectedPlayer, roleTypeKey)
+                true
+            }
+            "reset" -> {
+                Role().reset()
                 true
             }
             else -> false

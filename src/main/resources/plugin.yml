@@ -11,5 +11,5 @@ commands:
     permission-message: You don't have <permission>
 permissions:
   JinroCraft.admin:
-    description: Gives access to Artillery admin commands
+    description: Gives access to JinroCraft admin commands
     default: op

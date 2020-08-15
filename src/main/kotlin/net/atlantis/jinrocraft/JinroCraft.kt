@@ -2,6 +2,8 @@ package net.atlantis.jinrocraft
 
 import net.atlantis.jinrocraft.command.RoleCommand
 import net.atlantis.jinrocraft.ext.initCommand
+import net.atlantis.jinrocraft.ext.registerListener
+import net.atlantis.jinrocraft.listener.PlayerListener
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -11,6 +13,8 @@ class JinroCraft : JavaPlugin() {
         saveDefaultConfig()
 
         setupKoin()
+
+        registerListener(PlayerListener())
 
         initCommand("role", RoleCommand())
     }
