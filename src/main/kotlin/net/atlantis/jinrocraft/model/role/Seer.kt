@@ -9,6 +9,9 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 
 class Seer : Role() {
+    override fun onPassive(player: Player) {
+    }
+
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
         if (targetEntity is Player && player.level >= 10 && player.equipment?.itemInMainHand?.type == Material.SHEARS) {
             val targetRoleType = RoleService().getRole(targetEntity)

@@ -12,10 +12,13 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 
 class Medium : Role() {
+    override fun onPassive(player: Player) {
+    }
+
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
         if (targetEntity is ArmorStand && targetEntity.getBooleanMetadata(MetadataKey.IS_GRAVE.key) && player.equipment?.itemInMainHand?.type == Material.SHEARS) {
             val targetRoleType = RoleService().getRole(targetEntity)
-            when(targetRoleType){
+            when (targetRoleType) {
                 RoleType.WEREWOLF -> {
                     player.sendMessage("${ChatColor.RED}${targetEntity.name}は ${ChatColor.BOLD}人狼 ${ChatColor.RESET}でした")
                 }

@@ -4,7 +4,9 @@ import net.atlantis.jinrocraft.command.RoleCommand
 import net.atlantis.jinrocraft.command.StatusCommand
 import net.atlantis.jinrocraft.ext.initCommand
 import net.atlantis.jinrocraft.ext.registerListener
+import net.atlantis.jinrocraft.ext.scheduleAsyncRunnable
 import net.atlantis.jinrocraft.listener.PlayerListener
+import net.atlantis.jinrocraft.runnable.PassiveRunnable
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -19,6 +21,8 @@ class JinroCraft : JavaPlugin() {
 
         initCommand("status", StatusCommand())
         initCommand("role", RoleCommand())
+
+        scheduleAsyncRunnable(PassiveRunnable(), 20, 500)
     }
 
     override fun onDisable() {
