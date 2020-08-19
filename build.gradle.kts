@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     java
     kotlin("jvm").version(Dependencies.Kotlin.version)
@@ -22,6 +20,7 @@ dependencies {
     compile(Dependencies.Rx.java)
     compile(Dependencies.Koin.core)
     compile(Dependencies.Koin.coreExt)
+    testCompile(Dependencies.JUnit.core)
 }
 
 buildscript {
@@ -37,5 +36,9 @@ buildscript {
 tasks {
     withType<Jar> {
         from(configurations.getByName("compile").map { if (it.isDirectory) it else zipTree(it) })
+    }
+
+    withType<Test>().configureEach {
+        useJUnitPlatform()
     }
 }

@@ -15,6 +15,9 @@ commands:
   jc:
     description: jinro chat command
     usage: /<command> text
+  co:
+    description: co command
+    usage: /<command>
 permissions:
   JinroCraft.admin:
     description: Gives access to JinroCraft admin commands

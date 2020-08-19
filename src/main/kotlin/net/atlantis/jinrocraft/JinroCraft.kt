@@ -1,12 +1,15 @@
 package net.atlantis.jinrocraft
 
+import net.atlantis.jinrocraft.command.ComingOutCommand
 import net.atlantis.jinrocraft.command.JinroChatCommand
 import net.atlantis.jinrocraft.command.RoleCommand
 import net.atlantis.jinrocraft.command.StatusCommand
+import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.ext.initCommand
 import net.atlantis.jinrocraft.ext.registerListener
 import net.atlantis.jinrocraft.ext.scheduleAsyncRunnable
 import net.atlantis.jinrocraft.listener.PlayerListener
+import net.atlantis.jinrocraft.listener.ViewListener
 import net.atlantis.jinrocraft.runnable.PassiveRunnable
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.context.startKoin
@@ -19,10 +22,12 @@ class JinroCraft : JavaPlugin() {
         setupKoin()
 
         registerListener(PlayerListener())
+        registerListener(ViewListener())
 
         initCommand("status", StatusCommand())
         initCommand("role", RoleCommand())
         initCommand("jc", JinroChatCommand())
+        initCommand("co", ComingOutCommand())
 
         scheduleAsyncRunnable(PassiveRunnable(), 20, 500)
     }
@@ -32,6 +37,9 @@ class JinroCraft : JavaPlugin() {
 
     private val myModule = module {
         single<JavaPlugin> { this@JinroCraft }
+        single { config }
+        single { server }
+        single { PluginPreference(get(), get()) }
     }
 
     private fun setupKoin() {

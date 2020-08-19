@@ -15,7 +15,6 @@ class RoleCommand : BaseCommand() {
             "set" -> {
                 val selectedPlayerName = args[1] ?: return false
                 val selectedPlayer = plugin.server.getPlayer(selectedPlayerName) ?: return false
-                plugin.server.broadcastMessage(selectedPlayer.uniqueId.toString())
                 val roleTypeKey = args[2] ?: return false
                 RoleService().setRole(selectedPlayer, roleTypeKey)
                 true
