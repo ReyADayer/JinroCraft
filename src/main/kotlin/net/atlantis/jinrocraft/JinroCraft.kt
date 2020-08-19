@@ -22,7 +22,7 @@ class JinroCraft : JavaPlugin() {
 
         initCommand("status", StatusCommand())
         initCommand("role", RoleCommand())
-        initCommand("jd", JinroChatCommand())
+        initCommand("jc", JinroChatCommand())
 
         scheduleAsyncRunnable(PassiveRunnable(), 20, 500)
     }
