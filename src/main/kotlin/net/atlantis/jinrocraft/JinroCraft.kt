@@ -11,6 +11,7 @@ import net.atlantis.jinrocraft.ext.scheduleAsyncRunnable
 import net.atlantis.jinrocraft.listener.PlayerListener
 import net.atlantis.jinrocraft.listener.ViewListener
 import net.atlantis.jinrocraft.runnable.PassiveRunnable
+import net.atlantis.jinrocraft.scoreboad.CoScoreboard
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -40,6 +41,7 @@ class JinroCraft : JavaPlugin() {
         single { config }
         single { server }
         single { PluginPreference(get(), get()) }
+        single { CoScoreboard(get()) }
     }
 
     private fun setupKoin() {
