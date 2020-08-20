@@ -18,6 +18,9 @@ commands:
   co:
     description: co command
     usage: /<command>
+  vote:
+    description: vote command
+    usage: /<command> PlayerName
 permissions:
   JinroCraft.admin:
     description: Gives access to JinroCraft admin commands

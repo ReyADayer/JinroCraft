@@ -4,6 +4,7 @@ import net.atlantis.jinrocraft.command.ComingOutCommand
 import net.atlantis.jinrocraft.command.JinroChatCommand
 import net.atlantis.jinrocraft.command.RoleCommand
 import net.atlantis.jinrocraft.command.StatusCommand
+import net.atlantis.jinrocraft.command.VoteCommand
 import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.ext.initCommand
 import net.atlantis.jinrocraft.ext.registerListener
@@ -30,6 +31,7 @@ class JinroCraft : JavaPlugin() {
         initCommand("role", RoleCommand())
         initCommand("jc", JinroChatCommand())
         initCommand("co", ComingOutCommand())
+        initCommand("vote", VoteCommand())
 
         scheduleAsyncRunnable(PassiveRunnable(), 20, 500)
         scheduleAsyncRunnable(TimeRunnable(), 20, 20)
