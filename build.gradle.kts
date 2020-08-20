@@ -1,10 +1,12 @@
 plugins {
     java
     kotlin("jvm").version(Dependencies.Kotlin.version)
+    kotlin("kapt").version(Dependencies.Kotlin.version)
 }
 
 group = "net.atlantis"
-version = "1.1.1"
+version = "1.1.2"
+val pluginName = "JinroCraft"
 
 repositories {
     jcenter()
@@ -14,7 +16,8 @@ repositories {
 }
 
 dependencies {
-    compile(Dependencies.Spigot.api)
+    compileOnly(Dependencies.Spigot.api)
+    compileOnly(Dependencies.Spigot.annotations)
     compile(Dependencies.Kotlin.stdlib)
     compile(Dependencies.Kotlin.reflect)
     compile(Dependencies.Rx.java)
@@ -22,6 +25,7 @@ dependencies {
     compile(Dependencies.Koin.coreExt)
     compile(Dependencies.Json.core)
     testCompile(Dependencies.JUnit.core)
+    kapt("$group:$pluginName:$version")
 }
 
 buildscript {

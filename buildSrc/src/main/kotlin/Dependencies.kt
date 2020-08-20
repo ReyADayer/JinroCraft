@@ -1,6 +1,6 @@
 object Dependencies {
     object Kotlin {
-        val version = "1.3.70"
+        val version = "1.4.0"
         val classpath = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
@@ -12,8 +12,9 @@ object Dependencies {
     }
 
     object Spigot {
-        val version = "1.16.1-R0.1-SNAPSHOT"
+        val version = "1.15.2-R0.1-SNAPSHOT"
         val api = "org.spigotmc:spigot-api:$version"
+        val annotations = "org.spigotmc:plugin-annotations:1.2.3-SNAPSHOT"
         val repository = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
     }
 
