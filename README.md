@@ -12,7 +12,7 @@
 
 例
 
-`/rore setting Werewolf 3`
+`/role setting Werewolf 3`
 
 |  役職  |  英語名  |
 | ---- | ---- |
@@ -33,9 +33,16 @@
 `/status`コマンドで自分の役職を確認できます。
 人狼は`/jc <会話の内容>`で人狼同士で会話することができます。
 
+![2020-08-20_14 01 42](https://user-images.githubusercontent.com/17574089/90720107-e6c63800-e2f0-11ea-9ea1-eb8e70f7f821.png)
+
 一度死ぬとプレイヤーの墓が生成され、スペクターモードになります。
 
+![2020-08-20_14 01 57](https://user-images.githubusercontent.com/17574089/90720095-df9f2a00-e2f0-11ea-9cd1-f95165f9e605.png)
+
 `/co`でカミングアウトすることができます。
+
+![2020-08-20_14 27 53](https://user-images.githubusercontent.com/17574089/90720385-65bb7080-e2f1-11ea-8323-f68f87d6c81a.png)
+
 
 ## 役職の能力
 
@@ -58,6 +65,9 @@
  ## ゲームの終了
  
  いずれかの陣営が勝利条件を満たすとゲーム終了です。
+ 
+ ![2020-08-20_14 02 26](https://user-images.githubusercontent.com/17574089/90720121-ecbc1900-e2f0-11ea-8743-aeb2f2aaad6b.png)
+
  
  |陣営| 条件|
  | ---- | ---- |
