@@ -12,7 +12,7 @@
 
 例
 
-`/roe setting Werewolf 3`
+`/role setting Werewolf 3`
 
 |  役職  |  英語名  |
 | ---- | ---- |
