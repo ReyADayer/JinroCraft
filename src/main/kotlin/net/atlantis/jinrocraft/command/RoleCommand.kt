@@ -13,13 +13,6 @@ class RoleCommand : BaseCommand() {
 
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
         return when (args[0]) {
-//            "set" -> {
-//                val selectedPlayerName = args[1] ?: return false
-//                val selectedPlayer = plugin.server.getPlayer(selectedPlayerName) ?: return false
-//                val roleTypeKey = args[2] ?: return false
-//                roleService.setRole(selectedPlayer, roleTypeKey)
-//                true
-//            }
             "reset" -> {
                 roleService.reset()
                 true

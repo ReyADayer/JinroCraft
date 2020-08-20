@@ -23,7 +23,6 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class PlayerListener : Listener, KoinComponent {
-    private val plugin: JavaPlugin by inject()
     private val roleService: RoleService by inject()
 
     @EventHandler

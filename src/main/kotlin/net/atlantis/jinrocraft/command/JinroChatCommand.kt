@@ -5,14 +5,14 @@ import net.atlantis.jinrocraft.message.JinroMessage
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.GameMode
+import org.bukkit.Server
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.inject
 
 class JinroChatCommand : BaseCommand() {
-    private val plugin: JavaPlugin by inject()
+    private val server: Server by inject()
     private val roleService: RoleService by inject()
 
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
@@ -23,7 +23,7 @@ class JinroChatCommand : BaseCommand() {
 
         if (roleType == RoleType.WEREWOLF) {
             val text = args[0] ?: return true
-            plugin.server.getOnlineAlivePlayers()
+            server.getOnlineAlivePlayers()
                     .filter { roleService.getRole(player) == RoleType.WEREWOLF }
                     .forEach {
                         JinroMessage().text(player, it, text)

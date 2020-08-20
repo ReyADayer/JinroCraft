@@ -8,8 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.inject
 
 class ComingOutCommand : BaseCommand() {
-    private val plugin: JavaPlugin by inject()
-
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
         CoMenu(player).show()
         return true
