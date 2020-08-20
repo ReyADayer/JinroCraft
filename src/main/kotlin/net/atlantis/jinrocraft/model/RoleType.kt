@@ -12,9 +12,9 @@ import kotlin.reflect.KClass
 
 enum class RoleType(val key: String, val jpName: String, val groupType: GroupType, val coIcon: KClass<out Icon>) {
     CITIZEN("Citizen", "市民", GroupType.CITIZENS, CitizenCoIcon::class),
-    SEER("Seer", "占い師", GroupType.CITIZENS,SeerCoIcon::class),
-    MEDIUM("Medium", "霊能者", GroupType.CITIZENS,MediumCoIcon::class),
-    HUNTER("Hunter", "狩人", GroupType.CITIZENS,HunterCoIcon::class),
+    SEER("Seer", "占い師", GroupType.CITIZENS, SeerCoIcon::class),
+    MEDIUM("Medium", "霊能者", GroupType.CITIZENS, MediumCoIcon::class),
+    HUNTER("Hunter", "狩人", GroupType.CITIZENS, HunterCoIcon::class),
     WEREWOLF("Werewolf", "人狼", GroupType.WEREWOLVES, WerewolfCoIcon::class),
     MADMAN("Madman", "狂人", GroupType.WEREWOLVES, MadmanCoIcon::class),
     FOX("Fox", "妖狐", GroupType.FOXES, FoxCoIcon::class);

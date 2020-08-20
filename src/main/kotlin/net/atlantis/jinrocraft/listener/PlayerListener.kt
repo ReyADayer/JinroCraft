@@ -18,7 +18,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerRespawnEvent
-import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
