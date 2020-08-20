@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft.listener
 
+import net.atlantis.jinrocraft.model.GameEnd
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
 import net.atlantis.jinrocraft.model.npc.Grave
@@ -23,11 +24,12 @@ import org.koin.core.inject
 
 class PlayerListener : Listener, KoinComponent {
     private val plugin: JavaPlugin by inject()
+    private val roleService: RoleService by inject()
 
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
         val player = event.player
-        RoleService().initRole(player)
+        roleService.initRole(player)
     }
 
     @EventHandler
@@ -35,6 +37,7 @@ class PlayerListener : Listener, KoinComponent {
         val player = event.entity
         event.deathMessage = "${ChatColor.RED}${player.name}が襲撃されました"
         Grave().create(player.location, player)
+        GameEnd().execute()
     }
 
     @EventHandler
@@ -55,13 +58,16 @@ class PlayerListener : Listener, KoinComponent {
     fun onClick(event: PlayerInteractAtEntityEvent) {
         val player = event.player
         val clickedEntity = event.rightClicked
-        val roleType = RoleService().getRole(player)
+        val roleType = roleService.getRole(player)
         when (roleType) {
             RoleType.SEER -> {
                 Seer().onClickedEntity(player, clickedEntity)
             }
             RoleType.MEDIUM -> {
                 Medium().onClickedEntity(player, clickedEntity)
+            }
+            else -> {
+
             }
         }
     }
@@ -71,10 +77,13 @@ class PlayerListener : Listener, KoinComponent {
         val attacker = event.damager
         if (attacker is Player) {
             val defender = event.entity
-            val roleType = RoleService().getRole(attacker)
+            val roleType = roleService.getRole(attacker)
             when (roleType) {
                 RoleType.WEREWOLF -> {
                     Werewolf().onAttackedEntity(attacker, defender, event)
+                }
+                else -> {
+
                 }
             }
         }

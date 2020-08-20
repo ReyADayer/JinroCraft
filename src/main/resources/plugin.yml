@@ -9,6 +9,11 @@ commands:
     usage: /<command>
     permission: JinroCraft.admin
     permission-message: You don't have <permission>
+  game:
+    description: game command
+    usage: /<command>
+    permission: JinroCraft.admin
+    permission-message: You don't have <permission>
   status:
     description: role command
     usage: /<command>

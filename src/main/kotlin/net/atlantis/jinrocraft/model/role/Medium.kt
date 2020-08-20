@@ -10,14 +10,17 @@ import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.koin.core.inject
 
 class Medium : Role() {
+    private val roleService: RoleService by inject()
+
     override fun onPassive(player: Player) {
     }
 
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
         if (targetEntity is ArmorStand && targetEntity.getBooleanMetadata(MetadataKey.IS_GRAVE.key) && player.equipment?.itemInMainHand?.type == Material.SHEARS) {
-            val targetRoleType = RoleService().getRole(targetEntity)
+            val targetRoleType = roleService.getRole(targetEntity)
             when (targetRoleType) {
                 RoleType.WEREWOLF -> {
                     player.sendMessage("${ChatColor.RED}${targetEntity.name}は ${ChatColor.BOLD}人狼 ${ChatColor.RESET}でした")

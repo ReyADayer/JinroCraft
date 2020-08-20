@@ -7,14 +7,17 @@ import org.bukkit.Material
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.koin.core.inject
 
 class Seer : Role() {
+    private val roleService: RoleService by inject()
+
     override fun onPassive(player: Player) {
     }
 
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
         if (targetEntity is Player && player.level >= 10 && player.equipment?.itemInMainHand?.type == Material.SHEARS) {
-            val targetRoleType = RoleService().getRole(targetEntity)
+            val targetRoleType = roleService.getRole(targetEntity)
             player.level -= 10
             when (targetRoleType) {
                 RoleType.WEREWOLF -> {

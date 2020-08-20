@@ -13,9 +13,10 @@ import org.koin.core.inject
 
 class JinroChatCommand : BaseCommand() {
     private val plugin: JavaPlugin by inject()
+    private val roleService: RoleService by inject()
 
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
-        val roleType = RoleService().getRole(player)
+        val roleType = roleService.getRole(player)
         if (player.gameMode != GameMode.SURVIVAL) {
             return false
         }
@@ -23,7 +24,7 @@ class JinroChatCommand : BaseCommand() {
         if (roleType == RoleType.WEREWOLF) {
             val text = args[0] ?: return true
             plugin.server.getOnlineAlivePlayers()
-                    .filter { RoleService().getRole(player) == RoleType.WEREWOLF }
+                    .filter { roleService.getRole(player) == RoleType.WEREWOLF }
                     .forEach {
                         JinroMessage().text(player, it, text)
                     }

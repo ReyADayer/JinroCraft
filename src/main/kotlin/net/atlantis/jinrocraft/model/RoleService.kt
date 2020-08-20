@@ -1,22 +1,36 @@
 package net.atlantis.jinrocraft.model
 
 import net.atlantis.jinrocraft.config.PluginPreference
+import net.atlantis.jinrocraft.ext.getOnlineAlivePlayers
 import net.atlantis.jinrocraft.ext.getStringMetadata
 import net.atlantis.jinrocraft.ext.setStringMetadata
 import net.atlantis.jinrocraft.metadata.MetadataKey
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import java.util.*
 
-class RoleService : KoinComponent {
-    private val plugin: JavaPlugin by inject()
-    private val pluginPreference: PluginPreference by inject()
+class RoleService(private val plugin: JavaPlugin, private val pluginPreference: PluginPreference) {
 
     fun reset() {
         pluginPreference.resetPlayerRole()
         pluginPreference.roles = listOf()
+    }
+
+    fun initRoles() {
+        plugin.server.onlinePlayers.forEach {
+            setRole(it, RoleType.CITIZEN)
+        }
+        val roleSettings = pluginPreference.getRoleSettings()
+        roleSettings.forEach { roleType, count ->
+            if (count > 0) {
+                repeat(count) {
+                    val players = plugin.server.getOnlineAlivePlayers().filter { getRole(it) == RoleType.CITIZEN }
+                    val player = players[Random().nextInt(players.size)]
+                    setRole(player, roleType)
+                }
+            }
+        }
     }
 
     fun initRole(player: Player) {
@@ -28,6 +42,17 @@ class RoleService : KoinComponent {
         } else {
             player.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
         }
+    }
+
+    fun getRoles(): String {
+        var result = "役職内訳 "
+        val roleSettings = pluginPreference.getRoleSettings()
+        roleSettings.forEach { roleType, count ->
+            if (count > 0) {
+                result += "${roleType.jpName}:$count"
+            }
+        }
+        return result
     }
 
     fun getRole(entity: Entity): RoleType? {
@@ -47,5 +72,20 @@ class RoleService : KoinComponent {
         roles.add(roleType.key)
         roles.distinct()
         pluginPreference.roles = roles
+        player.sendMessage("あなたは${roleType.jpName}です")
+    }
+
+    fun setting(roleTypeKey: String, count: Int) {
+        val roleType = RoleType.findByKey(roleTypeKey) ?: return
+        pluginPreference.setRoleSetting(roleType, count)
+
+        val roleSettings = pluginPreference.getRoleSettings()
+        val roleTypeKeys: List<String> = roleSettings.filter { it.value != 0 }.map { it.key.key }
+        pluginPreference.roles = roleTypeKeys
+    }
+
+    fun clearSetting() {
+        pluginPreference.resetRoleSetting()
+        pluginPreference.roles = listOf()
     }
 }

@@ -15,6 +15,7 @@ import org.koin.core.inject
 
 class Grave : KoinComponent {
     private val plugin: JavaPlugin by inject()
+    private val roleService: RoleService by inject()
 
     fun create(location: Location, player: Player) {
         location.spawn<ArmorStand> { armorStand ->
@@ -25,7 +26,7 @@ class Grave : KoinComponent {
             armorStand.isInvulnerable = true
             armorStand.isSmall = false
             armorStand.setBooleanMetadata(plugin, MetadataKey.IS_GRAVE.key, true)
-            RoleService().getRole(player)?.let { roleType ->
+            roleService.getRole(player)?.let { roleType ->
                 armorStand.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
             }
             armorStand.equipment?.helmet = ItemStackUtil.head(player)

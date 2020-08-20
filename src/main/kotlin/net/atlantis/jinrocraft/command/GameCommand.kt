@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft.command
 
+import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.model.RoleService
 import org.bukkit.Server
 import org.bukkit.command.Command
@@ -7,32 +8,23 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.koin.core.inject
 
-class RoleCommand : BaseCommand() {
+class GameCommand : BaseCommand() {
     private val server: Server by inject()
+    private val pluginPreference: PluginPreference by inject()
     private val roleService: RoleService by inject()
 
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
         return when (args[0]) {
-//            "set" -> {
-//                val selectedPlayerName = args[1] ?: return false
-//                val selectedPlayer = plugin.server.getPlayer(selectedPlayerName) ?: return false
-//                val roleTypeKey = args[2] ?: return false
-//                roleService.setRole(selectedPlayer, roleTypeKey)
-//                true
-//            }
-            "reset" -> {
+            "start" -> {
+                pluginPreference.gameStart = true
                 roleService.reset()
+                roleService.initRoles()
+                val world = server.getWorld("world") ?: return false
+                world.time = 0
                 true
             }
-            "setting" -> {
-                val roleTypeKey = args[1] ?: return false
-                val count = args[2]?.toIntOrNull() ?: return false
-                roleService.setting(roleTypeKey, count)
-                server.broadcastMessage(roleService.getRoles())
-                true
-            }
-            "clear_setting" -> {
-                roleService.clearSetting()
+            "stop" -> {
+                pluginPreference.gameStart = false
                 true
             }
             else -> false

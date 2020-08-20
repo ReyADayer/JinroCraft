@@ -39,7 +39,7 @@ class VoteScoreboard(private val plugin: JavaPlugin, private val server: Server)
     }
 
     fun execute() {
-        val player = getExecutePlayer()
+        val player = getExecutePlayer() ?: return
         server.broadcastMessage("${player.name}が処刑されます")
         object : BukkitRunnable() {
             override fun run() {
@@ -73,11 +73,14 @@ class VoteScoreboard(private val plugin: JavaPlugin, private val server: Server)
         return scores
     }
 
-    private fun getExecutePlayer(): Player {
+    private fun getExecutePlayer(): Player? {
         getVoteScores().maxBy { it.value }?.key?.let {
             return it
         }
         val players = server.getOnlineAlivePlayers()
+        if (players.isEmpty()) {
+            return null
+        }
         return players[Random().nextInt(players.size)]
     }
 }

@@ -1,6 +1,7 @@
 package net.atlantis.jinrocraft
 
 import net.atlantis.jinrocraft.command.ComingOutCommand
+import net.atlantis.jinrocraft.command.GameCommand
 import net.atlantis.jinrocraft.command.JinroChatCommand
 import net.atlantis.jinrocraft.command.RoleCommand
 import net.atlantis.jinrocraft.command.StatusCommand
@@ -9,8 +10,10 @@ import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.ext.initCommand
 import net.atlantis.jinrocraft.ext.registerListener
 import net.atlantis.jinrocraft.ext.scheduleAsyncRunnable
+import net.atlantis.jinrocraft.ext.scheduleRunnable
 import net.atlantis.jinrocraft.listener.PlayerListener
 import net.atlantis.jinrocraft.listener.ViewListener
+import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.runnable.PassiveRunnable
 import net.atlantis.jinrocraft.runnable.TimeRunnable
 import net.atlantis.jinrocraft.scoreboad.CoScoreboard
@@ -28,6 +31,7 @@ class JinroCraft : JavaPlugin() {
         registerListener(PlayerListener())
         registerListener(ViewListener())
 
+        initCommand("game", GameCommand())
         initCommand("status", StatusCommand())
         initCommand("role", RoleCommand())
         initCommand("jc", JinroChatCommand())
@@ -35,7 +39,7 @@ class JinroCraft : JavaPlugin() {
         initCommand("vote", VoteCommand())
 
         scheduleAsyncRunnable(PassiveRunnable(), 20, 500)
-        scheduleAsyncRunnable(TimeRunnable(), 20, 20)
+        scheduleRunnable(TimeRunnable(), 20, 20)
     }
 
     override fun onDisable() {
@@ -48,6 +52,7 @@ class JinroCraft : JavaPlugin() {
         single { PluginPreference(get(), get()) }
         single { CoScoreboard(get()) }
         single { VoteScoreboard(get(), get()) }
+        single { RoleService(get(), get()) }
     }
 
     private fun setupKoin() {

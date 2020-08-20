@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft.runnable
 
+import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.model.time.TimeType
 import net.atlantis.jinrocraft.scoreboad.VoteScoreboard
 import net.atlantis.jinrocraft.view.Title
@@ -12,10 +13,14 @@ import org.koin.core.inject
 class TimeRunnable : BukkitRunnable(), KoinComponent {
     private val server: Server by inject()
     private val voteScoreboard: VoteScoreboard by inject()
+    private val pluginPreference: PluginPreference by inject()
 
     private var currentTimeType = TimeType.MOONING
 
     override fun run() {
+        if (!pluginPreference.gameStart) {
+            return
+        }
         val world = server.getWorld("world") ?: return
         val timeType = TimeType.findByWorld(world) ?: return
         if (currentTimeType != timeType) {
