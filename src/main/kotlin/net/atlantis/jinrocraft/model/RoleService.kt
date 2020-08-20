@@ -68,10 +68,6 @@ class RoleService(private val plugin: JavaPlugin, private val pluginPreference: 
     fun setRole(player: Player, roleType: RoleType) {
         pluginPreference.setPlayerRole(player, roleType.key)
         player.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
-        val roles = pluginPreference.roles.toMutableList()
-        roles.add(roleType.key)
-        roles.distinct()
-        pluginPreference.roles = roles
         player.sendMessage("あなたは${roleType.jpName}です")
     }
 
