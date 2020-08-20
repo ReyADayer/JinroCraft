@@ -14,6 +14,7 @@ import net.atlantis.jinrocraft.listener.ViewListener
 import net.atlantis.jinrocraft.runnable.PassiveRunnable
 import net.atlantis.jinrocraft.runnable.TimeRunnable
 import net.atlantis.jinrocraft.scoreboad.CoScoreboard
+import net.atlantis.jinrocraft.scoreboad.VoteScoreboard
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -46,6 +47,7 @@ class JinroCraft : JavaPlugin() {
         single { server }
         single { PluginPreference(get(), get()) }
         single { CoScoreboard(get()) }
+        single { VoteScoreboard(get()) }
     }
 
     private fun setupKoin() {

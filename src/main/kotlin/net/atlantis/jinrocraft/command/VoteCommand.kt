@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft.command
 
+import net.atlantis.jinrocraft.scoreboad.VoteScoreboard
 import org.bukkit.Server
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -8,11 +9,12 @@ import org.koin.core.inject
 
 class VoteCommand : BaseCommand() {
     private val server: Server by inject()
+    private val voteScoreboard: VoteScoreboard by inject()
 
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
         val selectedPlayerName = args[0] ?: return false
         val selectedPlayer = server.getPlayer(selectedPlayerName) ?: return false
-        // TODO : 投票処理を追加
+        voteScoreboard.set(player, selectedPlayer)
         return true
     }
 
