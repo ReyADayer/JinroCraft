@@ -9,7 +9,7 @@ import org.koin.core.KoinComponent
 
 class ViewListener : Listener, KoinComponent {
     @EventHandler
-    fun onClickSummonMenu(event: InventoryClickEvent) {
+    fun onClickCoMenu(event: InventoryClickEvent) {
         if (CoMenu.isMenu(event.view.title)) {
             event.currentItem?.let {
                 CoMenu(event.whoClicked as Player).clickIcon(it)
