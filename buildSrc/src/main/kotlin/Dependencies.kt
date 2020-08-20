@@ -32,6 +32,10 @@ object Dependencies {
         val coreExt = "org.koin:koin-core-ext:$version"
     }
 
+    object Json {
+        val core = "org.json:json:20190722"
+    }
+
     object JUnit {
         val core = "org.junit.jupiter:junit-jupiter:5.5.2"
     }

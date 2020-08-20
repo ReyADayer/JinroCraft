@@ -20,6 +20,7 @@ dependencies {
     compile(Dependencies.Rx.java)
     compile(Dependencies.Koin.core)
     compile(Dependencies.Koin.coreExt)
+    compile(Dependencies.Json.core)
     testCompile(Dependencies.JUnit.core)
 }
 

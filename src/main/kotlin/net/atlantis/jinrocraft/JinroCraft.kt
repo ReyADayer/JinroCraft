@@ -11,6 +11,7 @@ import net.atlantis.jinrocraft.ext.scheduleAsyncRunnable
 import net.atlantis.jinrocraft.listener.PlayerListener
 import net.atlantis.jinrocraft.listener.ViewListener
 import net.atlantis.jinrocraft.runnable.PassiveRunnable
+import net.atlantis.jinrocraft.runnable.TimeRunnable
 import net.atlantis.jinrocraft.scoreboad.CoScoreboard
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.context.startKoin
@@ -31,6 +32,7 @@ class JinroCraft : JavaPlugin() {
         initCommand("co", ComingOutCommand())
 
         scheduleAsyncRunnable(PassiveRunnable(), 20, 500)
+        scheduleAsyncRunnable(TimeRunnable(), 20, 20)
     }
 
     override fun onDisable() {
