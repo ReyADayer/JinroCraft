@@ -1,6 +1,7 @@
 package net.atlantis.jinrocraft.command
 
 import net.atlantis.jinrocraft.scoreboad.VoteScoreboard
+import org.bukkit.GameMode
 import org.bukkit.Server
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -14,6 +15,9 @@ class VoteCommand : BaseCommand() {
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
         val selectedPlayerName = args[0] ?: return false
         val selectedPlayer = server.getPlayer(selectedPlayerName) ?: return false
+        if (selectedPlayer.gameMode != GameMode.SURVIVAL) {
+            return false
+        }
         voteScoreboard.set(player, selectedPlayer)
         return true
     }

@@ -47,7 +47,7 @@ class JinroCraft : JavaPlugin() {
         single { server }
         single { PluginPreference(get(), get()) }
         single { CoScoreboard(get()) }
-        single { VoteScoreboard(get()) }
+        single { VoteScoreboard(get(), get()) }
     }
 
     private fun setupKoin() {

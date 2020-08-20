@@ -1,6 +1,7 @@
 package net.atlantis.jinrocraft.runnable
 
 import net.atlantis.jinrocraft.model.time.TimeType
+import net.atlantis.jinrocraft.scoreboad.VoteScoreboard
 import net.atlantis.jinrocraft.view.Title
 import org.bukkit.ChatColor
 import org.bukkit.Server
@@ -10,6 +11,7 @@ import org.koin.core.inject
 
 class TimeRunnable : BukkitRunnable(), KoinComponent {
     private val server: Server by inject()
+    private val voteScoreboard: VoteScoreboard by inject()
 
     private var currentTimeType = TimeType.MOONING
 
@@ -22,6 +24,16 @@ class TimeRunnable : BukkitRunnable(), KoinComponent {
             server.onlinePlayers.forEach {
                 title.send(it)
                 it.playSound(it.location, timeType.sound, 1.0f, 0.8f)
+            }
+            when (currentTimeType) {
+                TimeType.MOONING -> {
+                }
+                TimeType.EVENING -> {
+                    voteScoreboard.init()
+                }
+                TimeType.NIGHT -> {
+                    voteScoreboard.execute()
+                }
             }
         }
     }
