@@ -31,6 +31,10 @@ class RoleCommand : BaseCommand() {
                 server.broadcastMessage(roleService.getRoles())
                 true
             }
+            "list" -> {
+                server.broadcastMessage(roleService.getRoles())
+                true
+            }
             "clear_setting" -> {
                 roleService.clearSetting()
                 true
