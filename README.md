@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/ReyADayer/JinroCraft.svg?style=svg)](https://circleci.com/gh/ReyADayer/JinroCraft)
+
 # 人狼クラフト
 
 サバイバルワールドで人狼ゲームができるプラグインです。
