@@ -8,6 +8,7 @@ import net.atlantis.jinrocraft.model.role.Medium
 import net.atlantis.jinrocraft.model.role.Role
 import net.atlantis.jinrocraft.model.role.Seer
 import net.atlantis.jinrocraft.model.role.Werewolf
+import net.atlantis.jinrocraft.model.role.Zealot
 import net.atlantis.jinrocraft.view.Icon
 import net.atlantis.jinrocraft.view.co.CitizenCoIcon
 import net.atlantis.jinrocraft.view.co.FoxCoIcon
@@ -16,6 +17,7 @@ import net.atlantis.jinrocraft.view.co.MadmanCoIcon
 import net.atlantis.jinrocraft.view.co.MediumCoIcon
 import net.atlantis.jinrocraft.view.co.SeerCoIcon
 import net.atlantis.jinrocraft.view.co.WerewolfCoIcon
+import net.atlantis.jinrocraft.view.co.ZealotCoIcon
 import kotlin.reflect.KClass
 
 enum class RoleType(val key: String, val jpName: String, val roleClass: KClass<out Role>, val coIcon: KClass<out Icon>, val countType: CountType) {
@@ -25,6 +27,7 @@ enum class RoleType(val key: String, val jpName: String, val roleClass: KClass<o
     HUNTER("Hunter", "狩人", Hunter::class, HunterCoIcon::class, CountType.CITIZEN),
     WEREWOLF("Werewolf", "人狼", Werewolf::class, WerewolfCoIcon::class, CountType.WEREWOLF),
     MADMAN("Madman", "狂人", Madman::class, MadmanCoIcon::class, CountType.CITIZEN),
+    ZEALOT("Zealot", "狂信者", Zealot::class, ZealotCoIcon::class, CountType.CITIZEN),
     FOX("Fox", "妖狐", Fox::class, FoxCoIcon::class, CountType.NOTHING);
 
     companion object {
