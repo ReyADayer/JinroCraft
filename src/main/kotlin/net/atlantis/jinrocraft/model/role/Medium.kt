@@ -2,6 +2,7 @@ package net.atlantis.jinrocraft.model.role
 
 import net.atlantis.jinrocraft.ext.getBooleanMetadata
 import net.atlantis.jinrocraft.metadata.MetadataKeys
+import net.atlantis.jinrocraft.model.GroupType
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.ChatColor
@@ -13,6 +14,13 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.koin.core.inject
 
 class Medium : Role() {
+    override val name = "霊能者"
+    override val description = """
+        |ハサミを手に持った状態で墓を右クリックすると、
+        |死亡した人が人狼であるかどうかを分かります。
+    """.trimMargin()
+    override val groupType = GroupType.CITIZENS
+
     private val roleService: RoleService by inject()
 
     override fun onPassive(player: Player) {

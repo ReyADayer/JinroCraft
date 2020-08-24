@@ -1,5 +1,13 @@
 package net.atlantis.jinrocraft.model
 
+import net.atlantis.jinrocraft.model.role.Citizen
+import net.atlantis.jinrocraft.model.role.Fox
+import net.atlantis.jinrocraft.model.role.Hunter
+import net.atlantis.jinrocraft.model.role.Madman
+import net.atlantis.jinrocraft.model.role.Medium
+import net.atlantis.jinrocraft.model.role.Role
+import net.atlantis.jinrocraft.model.role.Seer
+import net.atlantis.jinrocraft.model.role.Werewolf
 import net.atlantis.jinrocraft.view.Icon
 import net.atlantis.jinrocraft.view.co.CitizenCoIcon
 import net.atlantis.jinrocraft.view.co.FoxCoIcon
@@ -10,14 +18,14 @@ import net.atlantis.jinrocraft.view.co.SeerCoIcon
 import net.atlantis.jinrocraft.view.co.WerewolfCoIcon
 import kotlin.reflect.KClass
 
-enum class RoleType(val key: String, val jpName: String, val groupType: GroupType, val coIcon: KClass<out Icon>) {
-    CITIZEN("Citizen", "市民", GroupType.CITIZENS, CitizenCoIcon::class),
-    SEER("Seer", "占い師", GroupType.CITIZENS, SeerCoIcon::class),
-    MEDIUM("Medium", "霊能者", GroupType.CITIZENS, MediumCoIcon::class),
-    HUNTER("Hunter", "狩人", GroupType.CITIZENS, HunterCoIcon::class),
-    WEREWOLF("Werewolf", "人狼", GroupType.WEREWOLVES, WerewolfCoIcon::class),
-    MADMAN("Madman", "狂人", GroupType.WEREWOLVES, MadmanCoIcon::class),
-    FOX("Fox", "妖狐", GroupType.FOXES, FoxCoIcon::class);
+enum class RoleType(val key: String, val jpName: String, val roleClass: KClass<out Role>, val coIcon: KClass<out Icon>, val countType: CountType) {
+    CITIZEN("Citizen", "市民", Citizen::class, CitizenCoIcon::class, CountType.CITIZEN),
+    SEER("Seer", "占い師", Seer::class, SeerCoIcon::class, CountType.CITIZEN),
+    MEDIUM("Medium", "霊能者", Medium::class, MediumCoIcon::class, CountType.CITIZEN),
+    HUNTER("Hunter", "狩人", Hunter::class, HunterCoIcon::class, CountType.CITIZEN),
+    WEREWOLF("Werewolf", "人狼", Werewolf::class, WerewolfCoIcon::class, CountType.WEREWOLF),
+    MADMAN("Madman", "狂人", Madman::class, MadmanCoIcon::class, CountType.CITIZEN),
+    FOX("Fox", "妖狐", Fox::class, FoxCoIcon::class, CountType.NOTHING);
 
     companion object {
         fun findByKey(key: String?): RoleType? {

@@ -5,10 +5,12 @@ import net.atlantis.jinrocraft.ext.getOnlineAlivePlayers
 import net.atlantis.jinrocraft.ext.getStringMetadata
 import net.atlantis.jinrocraft.ext.setStringMetadata
 import net.atlantis.jinrocraft.metadata.MetadataKeys
+import net.atlantis.jinrocraft.model.role.Role
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
+import kotlin.reflect.full.primaryConstructor
 
 class RoleService(private val plugin: JavaPlugin, private val pluginPreference: PluginPreference) {
 
@@ -83,5 +85,17 @@ class RoleService(private val plugin: JavaPlugin, private val pluginPreference: 
     fun clearSetting() {
         pluginPreference.resetRoleSetting()
         pluginPreference.roles = listOf()
+    }
+
+    fun getRolePlayers(roleType: RoleType): List<Player> {
+        return plugin.server.onlinePlayers.filter { getRole(it) == roleType }
+    }
+
+    fun getRoleClass(entity: Entity): Role? {
+        return getRoleClass(getRole(entity))
+    }
+
+    fun getRoleClass(roleType: RoleType?): Role? {
+        return roleType?.roleClass?.primaryConstructor?.call()
     }
 }

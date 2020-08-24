@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft.model.role
 
+import net.atlantis.jinrocraft.model.GroupType
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.ChatColor
@@ -10,6 +11,13 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.koin.core.inject
 
 class Seer : Role() {
+    override val name = "占い師"
+    override val description = """
+        |ハサミを手に持ってプレイヤーを右クリックすると、
+        |経験値を10消費して人狼であるかどうかを判定できます
+    """.trimMargin()
+    override val groupType = GroupType.CITIZENS
+
     private val roleService: RoleService by inject()
 
     override fun onPassive(player: Player) {

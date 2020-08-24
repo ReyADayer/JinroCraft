@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft.model.role
 
+import net.atlantis.jinrocraft.model.GroupType
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.entity.Entity
@@ -8,6 +9,12 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.koin.core.inject
 
 class Werewolf : Role() {
+    override val name = "人狼"
+    override val description = """
+        |夜の間、攻撃によるダメージが2増加します。
+    """.trimMargin()
+    override val groupType = GroupType.WEREWOLVES
+
     private val roleService: RoleService by inject()
 
     override fun onPassive(player: Player) {
@@ -23,5 +30,15 @@ class Werewolf : Role() {
         } else if (player.world.time > 18000L) {
             event.damage += 2.0
         }
+    }
+
+    override fun onShownStatus(player: Player) {
+        super.onShownStatus(player)
+        val players = roleService.getRolePlayers(RoleType.WEREWOLF)
+        var text = "人狼のプレイヤー "
+        players.forEach {
+            text += "${it.name} "
+        }
+        player.sendMessage(text)
     }
 }
