@@ -3,7 +3,7 @@ package net.atlantis.jinrocraft.model.npc
 import net.atlantis.jinrocraft.ext.setBooleanMetadata
 import net.atlantis.jinrocraft.ext.setStringMetadata
 import net.atlantis.jinrocraft.ext.spawn
-import net.atlantis.jinrocraft.metadata.MetadataKey
+import net.atlantis.jinrocraft.metadata.MetadataKeys
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.util.ItemStackUtil
 import org.bukkit.Location
@@ -25,9 +25,9 @@ class Grave : KoinComponent {
             armorStand.isVisible = false
             armorStand.isInvulnerable = true
             armorStand.isSmall = false
-            armorStand.setBooleanMetadata(plugin, MetadataKey.IS_GRAVE.key, true)
+            armorStand.setBooleanMetadata(plugin, MetadataKeys.IS_GRAVE, true)
             roleService.getRole(player)?.let { roleType ->
-                armorStand.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
+                armorStand.setStringMetadata(plugin, MetadataKeys.ROLE, roleType.key)
             }
             armorStand.equipment?.helmet = ItemStackUtil.head(player)
         }
