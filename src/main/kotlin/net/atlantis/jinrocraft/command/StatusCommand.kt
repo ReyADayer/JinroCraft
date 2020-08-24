@@ -10,8 +10,8 @@ class StatusCommand : BaseCommand() {
     private val roleService: RoleService by inject()
 
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
-        val roleType = roleService.getRole(player) ?: return false
-        player.sendMessage("あなたは ${roleType.jpName} です")
+        val role = roleService.getRoleClass(player)
+        role?.onShownStatus(player)
         return true
     }
 

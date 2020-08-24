@@ -3,8 +3,6 @@ package net.atlantis.jinrocraft.runnable
 import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.ext.getOnlineAlivePlayers
 import net.atlantis.jinrocraft.model.RoleService
-import net.atlantis.jinrocraft.model.RoleType
-import net.atlantis.jinrocraft.model.role.Hunter
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
 import org.koin.core.KoinComponent
@@ -21,20 +19,12 @@ class PassiveRunnable : BukkitRunnable(), KoinComponent {
         }
         plugin.server.getOnlineAlivePlayers()
                 .forEach {
-                    val roleType = roleService.getRole(it)
+                    val role = roleService.getRoleClass(it)
                     object : BukkitRunnable() {
                         override fun run() {
-                            when (roleType) {
-                                RoleType.HUNTER -> {
-                                    Hunter().onPassive(it)
-                                }
-                                else -> {
-
-                                }
-                            }
+                            role?.onPassive(it)
                         }
                     }.runTaskLater(plugin, 1)
                 }
-
     }
 }
