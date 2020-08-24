@@ -1,7 +1,7 @@
 package net.atlantis.jinrocraft.model.role
 
 import net.atlantis.jinrocraft.ext.getBooleanMetadata
-import net.atlantis.jinrocraft.metadata.MetadataKey
+import net.atlantis.jinrocraft.metadata.MetadataKeys
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.ChatColor
@@ -19,7 +19,7 @@ class Medium : Role() {
     }
 
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
-        if (targetEntity is ArmorStand && targetEntity.getBooleanMetadata(MetadataKey.IS_GRAVE.key) && player.equipment?.itemInMainHand?.type == Material.SHEARS) {
+        if (targetEntity is ArmorStand && targetEntity.getBooleanMetadata(MetadataKeys.IS_GRAVE) && player.equipment?.itemInMainHand?.type == Material.SHEARS) {
             val targetRoleType = roleService.getRole(targetEntity)
             when (targetRoleType) {
                 RoleType.WEREWOLF -> {

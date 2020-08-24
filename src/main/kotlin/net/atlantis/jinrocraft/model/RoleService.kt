@@ -4,7 +4,7 @@ import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.ext.getOnlineAlivePlayers
 import net.atlantis.jinrocraft.ext.getStringMetadata
 import net.atlantis.jinrocraft.ext.setStringMetadata
-import net.atlantis.jinrocraft.metadata.MetadataKey
+import net.atlantis.jinrocraft.metadata.MetadataKeys
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -40,7 +40,7 @@ class RoleService(private val plugin: JavaPlugin, private val pluginPreference: 
             // 存在しないときは市民に設定する
             pluginPreference.setPlayerRole(player, RoleType.CITIZEN.key)
         } else {
-            player.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
+            player.setStringMetadata(plugin, MetadataKeys.ROLE, roleType.key)
         }
     }
 
@@ -56,7 +56,7 @@ class RoleService(private val plugin: JavaPlugin, private val pluginPreference: 
     }
 
     fun getRole(entity: Entity): RoleType? {
-        val roleTypeKey = entity.getStringMetadata(MetadataKey.ROLE.key) ?: return null
+        val roleTypeKey = entity.getStringMetadata(MetadataKeys.ROLE) ?: return null
         return RoleType.findByKey(roleTypeKey)
     }
 
@@ -67,7 +67,7 @@ class RoleService(private val plugin: JavaPlugin, private val pluginPreference: 
 
     fun setRole(player: Player, roleType: RoleType) {
         pluginPreference.setPlayerRole(player, roleType.key)
-        player.setStringMetadata(plugin, MetadataKey.ROLE.key, roleType.key)
+        player.setStringMetadata(plugin, MetadataKeys.ROLE, roleType.key)
         player.sendMessage("あなたは${roleType.jpName}です")
     }
 
