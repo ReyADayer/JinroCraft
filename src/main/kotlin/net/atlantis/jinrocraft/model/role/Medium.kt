@@ -5,7 +5,6 @@ import net.atlantis.jinrocraft.metadata.MetadataKeys
 import net.atlantis.jinrocraft.model.GroupType
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
-import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Entity
@@ -27,19 +26,28 @@ class Medium : Role() {
     }
 
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
-        if (targetEntity is ArmorStand && targetEntity.getBooleanMetadata(MetadataKeys.IS_GRAVE) && player.equipment?.itemInMainHand?.type == Material.SHEARS) {
+        if (targetEntity is ArmorStand && targetEntity.getBooleanMetadata(MetadataKeys.IS_GRAVE) && canUse(player)) {
             val targetRoleType = roleService.getRole(targetEntity)
-            when (targetRoleType) {
-                RoleType.WEREWOLF -> {
-                    player.sendMessage("${ChatColor.RED}${targetEntity.name}は ${ChatColor.BOLD}人狼 ${ChatColor.RESET}でした")
-                }
-                else -> {
-                    player.sendMessage("${targetEntity.name}は ${ChatColor.BOLD}村人 ${ChatColor.RESET}でした")
-                }
-            }
+            val result = result(targetRoleType)
+            player.sendMessage(result.message(targetEntity))
         }
     }
 
     override fun onAttackedEntity(player: Player, targetEntity: Entity, event: EntityDamageByEntityEvent) {
+    }
+
+    private fun canUse(player: Player): Boolean {
+        return player.equipment?.itemInMainHand?.type == Material.SHEARS
+    }
+
+    private fun result(roleType: RoleType?): MediumResult {
+        return when (roleType) {
+            RoleType.WEREWOLF -> {
+                MediumResult.WEREWOLF
+            }
+            else -> {
+                MediumResult.NOT_WEREWOLF
+            }
+        }
     }
 }
