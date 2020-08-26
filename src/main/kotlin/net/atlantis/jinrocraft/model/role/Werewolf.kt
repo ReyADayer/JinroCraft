@@ -15,6 +15,8 @@ class Werewolf : Role() {
     """.trimMargin()
     override val groupType = GroupType.WEREWOLVES
 
+    override val canJinroChat = true
+
     private val roleService: RoleService by inject()
 
     override fun onPassive(player: Player) {

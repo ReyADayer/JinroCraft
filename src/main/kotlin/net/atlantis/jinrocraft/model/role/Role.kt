@@ -11,6 +11,8 @@ abstract class Role : KoinComponent {
     abstract val description: String
     abstract val groupType: GroupType
 
+    open val canJinroChat: Boolean = false
+
     abstract fun onPassive(player: Player)
 
     abstract fun onClickedEntity(player: Player, targetEntity: Entity)
