@@ -24,18 +24,18 @@ class Seer : Role() {
     }
 
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
-        if (targetEntity is Player && player.level >= 10 && player.equipment?.itemInMainHand?.type == Material.SHEARS) {
+        if (targetEntity is Player && canUse(player)) {
             val targetRoleType = roleService.getRole(targetEntity)
             player.level -= 10
-            when (targetRoleType) {
-                RoleType.WEREWOLF -> {
+            when (result(targetRoleType)) {
+                SeerResult.WEREWOLF -> {
                     player.sendMessage("${ChatColor.RED}${targetEntity.name}は ${ChatColor.BOLD}人狼 ${ChatColor.RESET}でした")
                 }
-                RoleType.FOX -> {
+                SeerResult.FOX -> {
                     targetEntity.damage(100.0)
                     player.sendMessage("${targetEntity.name}は ${ChatColor.BOLD}村人 ${ChatColor.RESET}でした")
                 }
-                else -> {
+                SeerResult.NOT_WEREWOLF -> {
                     player.sendMessage("${targetEntity.name}は ${ChatColor.BOLD}村人 ${ChatColor.RESET}でした")
                 }
             }
@@ -44,5 +44,23 @@ class Seer : Role() {
 
     override fun onAttackedEntity(player: Player, targetEntity: Entity, event: EntityDamageByEntityEvent) {
         // 攻撃時の特殊能力は無し
+    }
+
+    private fun canUse(player: Player): Boolean {
+        return player.level >= 10 && player.equipment?.itemInMainHand?.type == Material.SHEARS
+    }
+
+    private fun result(roleType: RoleType?): SeerResult {
+        return when (roleType) {
+            RoleType.WEREWOLF -> {
+                SeerResult.WEREWOLF
+            }
+            RoleType.FOX -> {
+                SeerResult.FOX
+            }
+            else -> {
+                SeerResult.NOT_WEREWOLF
+            }
+        }
     }
 }
