@@ -3,7 +3,6 @@ package net.atlantis.jinrocraft.model.role
 import net.atlantis.jinrocraft.model.GroupType
 import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
-import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
@@ -27,17 +26,10 @@ class Seer : Role() {
         if (targetEntity is Player && canUse(player)) {
             val targetRoleType = roleService.getRole(targetEntity)
             player.level -= 10
-            when (result(targetRoleType)) {
-                SeerResult.WEREWOLF -> {
-                    player.sendMessage("${ChatColor.RED}${targetEntity.name}は ${ChatColor.BOLD}人狼 ${ChatColor.RESET}でした")
-                }
-                SeerResult.FOX -> {
-                    targetEntity.damage(100.0)
-                    player.sendMessage("${targetEntity.name}は ${ChatColor.BOLD}村人 ${ChatColor.RESET}でした")
-                }
-                SeerResult.NOT_WEREWOLF -> {
-                    player.sendMessage("${targetEntity.name}は ${ChatColor.BOLD}村人 ${ChatColor.RESET}でした")
-                }
+            val result = result(targetRoleType)
+            player.sendMessage(result.message(targetEntity))
+            if (result == SeerResult.FOX) {
+                targetEntity.damage(100.0)
             }
         }
     }
