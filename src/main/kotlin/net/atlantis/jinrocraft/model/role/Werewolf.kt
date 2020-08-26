@@ -8,7 +8,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.koin.core.inject
 
-class Werewolf : Role() {
+open class Werewolf : Role() {
     override val name = "人狼"
     override val description = """
         |夜の間、攻撃によるダメージが2増加します。

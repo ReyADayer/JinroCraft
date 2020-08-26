@@ -50,6 +50,9 @@ class Seer : Role() {
             RoleType.FOX -> {
                 SeerResult.FOX
             }
+            RoleType.GREAT_WOLF -> {
+                SeerResult.NOT_WEREWOLF
+            }
             else -> {
                 SeerResult.NOT_WEREWOLF
             }

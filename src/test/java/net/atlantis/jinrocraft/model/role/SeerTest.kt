@@ -25,6 +25,7 @@ internal class SeerTest {
     fun result() {
         Assertions.assertEquals(SeerResult.WEREWOLF, seer.result(RoleType.WEREWOLF))
         Assertions.assertEquals(SeerResult.FOX, seer.result(RoleType.FOX))
+        Assertions.assertEquals(SeerResult.NOT_WEREWOLF, seer.result(RoleType.GREAT_WOLF))
         Assertions.assertEquals(SeerResult.NOT_WEREWOLF, seer.result(RoleType.CITIZEN))
     }
 

@@ -45,6 +45,9 @@ class Medium : Role() {
             RoleType.WEREWOLF -> {
                 MediumResult.WEREWOLF
             }
+            RoleType.GREAT_WOLF -> {
+                MediumResult.GREAT_WOLF
+            }
             else -> {
                 MediumResult.NOT_WEREWOLF
             }

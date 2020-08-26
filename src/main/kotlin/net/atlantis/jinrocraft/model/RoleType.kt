@@ -3,6 +3,7 @@ package net.atlantis.jinrocraft.model
 import net.atlantis.jinrocraft.model.role.Bakery
 import net.atlantis.jinrocraft.model.role.Citizen
 import net.atlantis.jinrocraft.model.role.Fox
+import net.atlantis.jinrocraft.model.role.GreatWolf
 import net.atlantis.jinrocraft.model.role.Hunter
 import net.atlantis.jinrocraft.model.role.Madman
 import net.atlantis.jinrocraft.model.role.Medium
@@ -15,6 +16,7 @@ import net.atlantis.jinrocraft.view.Icon
 import net.atlantis.jinrocraft.view.co.BakeryCoIcon
 import net.atlantis.jinrocraft.view.co.CitizenCoIcon
 import net.atlantis.jinrocraft.view.co.FoxCoIcon
+import net.atlantis.jinrocraft.view.co.GreatWolfCoIcon
 import net.atlantis.jinrocraft.view.co.HunterCoIcon
 import net.atlantis.jinrocraft.view.co.MadmanCoIcon
 import net.atlantis.jinrocraft.view.co.MediumCoIcon
@@ -31,6 +33,7 @@ enum class RoleType(val key: String, val jpName: String, val roleClass: KClass<o
     HUNTER("Hunter", "狩人", Hunter::class, HunterCoIcon::class, CountType.CITIZEN),
     BAKERY("Bakery", "パン屋", Bakery::class, BakeryCoIcon::class, CountType.CITIZEN),
     WEREWOLF("Werewolf", "人狼", Werewolf::class, WerewolfCoIcon::class, CountType.WEREWOLF),
+    GREAT_WOLF("GreatWolf", "大狼", GreatWolf::class, GreatWolfCoIcon::class, CountType.WEREWOLF),
     MADMAN("Madman", "狂人", Madman::class, MadmanCoIcon::class, CountType.CITIZEN),
     ZEALOT("Zealot", "狂信者", Zealot::class, ZealotCoIcon::class, CountType.CITIZEN),
     WHISPER_MADMAN("WhisperMadman", "ささやく狂人", WhisperMadman::class, WhisperMadmanCoIcon::class, CountType.CITIZEN),

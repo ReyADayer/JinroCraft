@@ -21,6 +21,7 @@ internal class MediumTest {
     @Test
     fun result() {
         Assertions.assertEquals(MediumResult.WEREWOLF, medium.result(RoleType.WEREWOLF))
+        Assertions.assertEquals(MediumResult.GREAT_WOLF, medium.result(RoleType.GREAT_WOLF))
         Assertions.assertEquals(MediumResult.NOT_WEREWOLF, medium.result(RoleType.CITIZEN))
     }
 
