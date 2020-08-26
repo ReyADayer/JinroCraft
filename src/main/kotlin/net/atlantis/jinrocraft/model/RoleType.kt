@@ -34,7 +34,7 @@ enum class RoleType(val key: String, val jpName: String, val roleClass: KClass<o
     MADMAN("Madman", "狂人", Madman::class, MadmanCoIcon::class, CountType.CITIZEN),
     ZEALOT("Zealot", "狂信者", Zealot::class, ZealotCoIcon::class, CountType.CITIZEN),
     WHISPER_MADMAN("WhisperMadman", "ささやく狂人", WhisperMadman::class, WhisperMadmanCoIcon::class, CountType.CITIZEN),
-    FOX("Fox", "妖狐", Fox::class, FoxCoIcon::class, CountType.NOTHING);
+    FOX("Fox", "妖狐", Fox::class, FoxCoIcon::class, CountType.FOXES);
 
     companion object {
         fun findByKey(key: String?): RoleType? {

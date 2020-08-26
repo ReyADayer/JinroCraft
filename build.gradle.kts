@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly(Dependencies.Spigot.api)
+    compile(Dependencies.Spigot.api)
     compileOnly(Dependencies.Spigot.annotations)
     kapt(Dependencies.Spigot.annotations)
     compile(Dependencies.Kotlin.stdlib)
@@ -26,6 +26,7 @@ dependencies {
     compile(Dependencies.Koin.coreExt)
     compile(Dependencies.Json.core)
     testCompile(Dependencies.JUnit.core)
+    testCompile(Dependencies.MockK.core)
 }
 
 buildscript {

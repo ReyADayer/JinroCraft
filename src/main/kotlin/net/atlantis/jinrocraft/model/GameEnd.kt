@@ -27,7 +27,7 @@ class GameEnd : KoinComponent {
         val players = server.getOnlineAlivePlayers()
         val wereWolfs = players.filter { roleService.getRole(it)?.countType == CountType.WEREWOLF }
         if (wereWolfs.isEmpty()) {
-            return if (isFoxesWin(players)) {
+            return if (isFoxesAlive(players)) {
                 GroupType.FOXES
             } else {
                 GroupType.CITIZENS
@@ -35,7 +35,7 @@ class GameEnd : KoinComponent {
         }
         val citizens = players.filter { roleService.getRole(it)?.countType == CountType.CITIZEN }
         if (citizens.size <= wereWolfs.size) {
-            return if (isFoxesWin(players)) {
+            return if (isFoxesAlive(players)) {
                 GroupType.FOXES
             } else {
                 GroupType.WEREWOLVES
@@ -44,8 +44,8 @@ class GameEnd : KoinComponent {
         return null
     }
 
-    private fun isFoxesWin(players: List<Player>): Boolean {
-        val foxes = players.filter { roleService.getRole(it)?.countType == CountType.WEREWOLF }
+    private fun isFoxesAlive(players: List<Player>): Boolean {
+        val foxes = players.filter { roleService.getRole(it)?.countType == CountType.FOXES }
         return foxes.isNotEmpty()
     }
 }
