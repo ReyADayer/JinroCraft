@@ -165,14 +165,14 @@ internal class GameEndTest {
     }
 
     private fun GameEnd.result(): GroupType? {
-        val method = gameEnd::class.java.getDeclaredMethod("result")
+        val method = this::class.java.getDeclaredMethod("result")
         method.isAccessible = true
-        return method.invoke(gameEnd) as GroupType?
+        return method.invoke(this) as GroupType?
     }
 
     private fun GameEnd.isFoxesAlive(players: List<Player>): Boolean {
-        val method = gameEnd::class.java.getDeclaredMethod("isFoxesAlive", List::class.java)
+        val method = this::class.java.getDeclaredMethod("isFoxesAlive", List::class.java)
         method.isAccessible = true
-        return method.invoke(gameEnd, players) as Boolean
+        return method.invoke(this, players) as Boolean
     }
 }
