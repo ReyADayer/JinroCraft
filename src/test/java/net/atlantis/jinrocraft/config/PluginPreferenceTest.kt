@@ -2,6 +2,8 @@ package net.atlantis.jinrocraft.config
 
 import io.mockk.every
 import io.mockk.mockk
+import net.atlantis.jinrocraft.factory.PlayerFactory
+import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Entity
@@ -17,6 +19,7 @@ internal class PluginPreferenceTest {
         private val plugin = mockk<JavaPlugin>()
         private val config = mockk<FileConfiguration>()
         private val pluginPreference = PluginPreference(plugin, config)
+        private val roleService = mockk<RoleService>()
 
         @BeforeAll
         @JvmStatic
@@ -60,9 +63,8 @@ internal class PluginPreferenceTest {
     }
 
     private fun getPlayer(roleType: RoleType): Player {
-        val player = mockk<Player>()
         val uuid = UUID.randomUUID()
-        every { player.uniqueId } returns uuid
+        val player = PlayerFactory.build(roleType, roleService, uuid = uuid)
         every { config.getString("role.$uuid") } returns roleType.key
         return player
     }

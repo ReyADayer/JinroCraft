@@ -1,7 +1,6 @@
 package net.atlantis.jinrocraft.model.role
 
-import io.mockk.every
-import io.mockk.mockk
+import net.atlantis.jinrocraft.factory.PlayerFactory
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -26,9 +25,7 @@ internal class MediumTest {
     }
 
     private fun getPlayer(itemInMainHandType: Material?): Player {
-        val player = mockk<Player>()
-        every { player.equipment?.itemInMainHand?.type } returns itemInMainHandType
-        return player
+        return PlayerFactory.build(itemInMainHandType)
     }
 
     private fun Medium.canUse(player: Player): Boolean {

@@ -2,13 +2,14 @@ package net.atlantis.jinrocraft.scoreboad
 
 import io.mockk.every
 import io.mockk.mockk
+import net.atlantis.jinrocraft.factory.ObjectiveFactory
+import net.atlantis.jinrocraft.factory.PlayerFactory
+import net.atlantis.jinrocraft.factory.ScoreFactory
+import net.atlantis.jinrocraft.factory.WorldFactory
 import org.bukkit.Server
 import org.bukkit.World
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
-import org.bukkit.scoreboard.DisplaySlot
-import org.bukkit.scoreboard.Objective
-import org.bukkit.scoreboard.Score
 import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.ScoreboardManager
 import org.junit.jupiter.api.Assertions
@@ -24,7 +25,7 @@ internal class VoteScoreboardTest {
         private val server = mockk<Server>()
         private val scoreboard = mockk<Scoreboard>()
         private val scoreboardManager = mockk<ScoreboardManager>()
-        private val objective = mockk<Objective>()
+        private val objective = ObjectiveFactory.build()
 
         @BeforeAll
         @JvmStatic
@@ -33,7 +34,6 @@ internal class VoteScoreboardTest {
             every { server.onlinePlayers } returns emptyList()
             every { scoreboardManager.newScoreboard } returns scoreboard
             every { scoreboard.registerNewObjective("vote", "vote", "投票") } returns objective
-            every { objective.displaySlot = DisplaySlot.SIDEBAR } returns Unit
         }
     }
 
@@ -41,7 +41,7 @@ internal class VoteScoreboardTest {
 
     @BeforeEach
     fun before() {
-        every { server.getWorld("world") } returns getWorld(12000)
+        every { server.getWorld("world") } returns getWorld()
         voteScoreboard.init()
     }
 
@@ -124,21 +124,14 @@ internal class VoteScoreboardTest {
     }
 
     private fun getPlayer(): Player {
-        val player = mockk<Player>()
-        val score = mockk<Score>()
         val name = UUID.randomUUID().toString()
-        every { player.name } returns name
+        val score = ScoreFactory.build()
         every { objective.getScore(name) } returns score
-        every { score.score = any() } returns Unit
-        every { player.scoreboard = any() } returns Unit
-        every { player.sendMessage(any() as String) } returns Unit
-        return player
+        return PlayerFactory.build(name)
     }
 
-    private fun getWorld(time: Long): World {
-        val world = mockk<World>()
-        every { world.time } returns time
-        return world
+    private fun getWorld(): World {
+        return WorldFactory.build(12000)
     }
 
     @Suppress("UNCHECKED_CAST")

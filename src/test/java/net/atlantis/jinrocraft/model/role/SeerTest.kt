@@ -1,7 +1,6 @@
 package net.atlantis.jinrocraft.model.role
 
-import io.mockk.every
-import io.mockk.mockk
+import net.atlantis.jinrocraft.factory.PlayerFactory
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -30,10 +29,7 @@ internal class SeerTest {
     }
 
     private fun getPlayer(level: Int, itemInMainHandType: Material?): Player {
-        val player = mockk<Player>()
-        every { player.level } returns level
-        every { player.equipment?.itemInMainHand?.type } returns itemInMainHandType
-        return player
+        return PlayerFactory.build(level, itemInMainHandType)
     }
 
     private fun Seer.canUse(player: Player): Boolean {

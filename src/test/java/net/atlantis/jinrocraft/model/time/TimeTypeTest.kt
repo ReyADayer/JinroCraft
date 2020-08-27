@@ -1,7 +1,6 @@
 package net.atlantis.jinrocraft.model.time
 
-import io.mockk.every
-import io.mockk.mockk
+import net.atlantis.jinrocraft.factory.WorldFactory
 import org.bukkit.World
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -21,8 +20,6 @@ internal class TimeTypeTest {
     }
 
     private fun getWorld(time: Long): World {
-        val world = mockk<World>()
-        every { world.time } returns time
-        return world
+        return WorldFactory.build(time)
     }
 }

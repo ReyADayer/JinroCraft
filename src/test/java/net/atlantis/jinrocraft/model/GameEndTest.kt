@@ -3,7 +3,7 @@ package net.atlantis.jinrocraft.model
 import io.mockk.every
 import io.mockk.mockk
 import net.atlantis.jinrocraft.config.PluginPreference
-import org.bukkit.GameMode
+import net.atlantis.jinrocraft.factory.PlayerFactory
 import org.bukkit.Server
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Player
@@ -158,10 +158,7 @@ internal class GameEndTest {
     }
 
     private fun getPlayer(roleType: RoleType): Player {
-        val player = mockk<Player>()
-        every { player.gameMode } returns GameMode.SURVIVAL
-        every { roleService.getRole(player) } returns roleType
-        return player
+        return PlayerFactory.build(roleType, roleService)
     }
 
     private fun GameEnd.result(): GroupType? {

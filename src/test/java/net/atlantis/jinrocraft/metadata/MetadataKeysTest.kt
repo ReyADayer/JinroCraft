@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 internal class MetadataKeysTest {
     @Test
-    fun keyTest(){
+    fun keyTest() {
         Assertions.assertEquals("ROLE", MetadataKeys.ROLE)
     }
 }
