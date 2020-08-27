@@ -18,7 +18,9 @@ class VoteScoreboard(private val plugin: JavaPlugin, private val server: Server)
 
     private val result = mutableMapOf<Player, Player>()
     private val scoreboard = server.scoreboardManager?.newScoreboard!!
-    private val objective = scoreboard.registerNewObjective(TAG, TAG, "投票")
+    private val objective = scoreboard.registerNewObjective(TAG, TAG, "投票").apply {
+        displaySlot = DisplaySlot.SIDEBAR
+    }
 
     fun init() {
         result.clear()
@@ -30,7 +32,7 @@ class VoteScoreboard(private val plugin: JavaPlugin, private val server: Server)
         val world = server.getWorld("world") ?: return
         val timeType = TimeType.findByWorld(world) ?: return
         if (timeType == TimeType.EVENING) {
-            result[player] = targetPlayer
+            setPlayer(player, targetPlayer)
             updateSideBar()
             showVoteScore()
             player.sendMessage("${targetPlayer.name}に投票しました")
@@ -50,6 +52,10 @@ class VoteScoreboard(private val plugin: JavaPlugin, private val server: Server)
         }.runTaskLater(plugin, 50)
     }
 
+    private fun setPlayer(player: Player, targetPlayer: Player) {
+        result[player] = targetPlayer
+    }
+
     private fun showVoteScore() {
         server.onlinePlayers.forEach {
             it.scoreboard = scoreboard
@@ -57,7 +63,6 @@ class VoteScoreboard(private val plugin: JavaPlugin, private val server: Server)
     }
 
     private fun updateSideBar() {
-        objective.displaySlot = DisplaySlot.SIDEBAR
         val scores = getVoteScores().toList().sortedBy { it.second }.take(5).toMap()
         scores.forEach { player, count ->
             val score = objective.getScore(player.name)
