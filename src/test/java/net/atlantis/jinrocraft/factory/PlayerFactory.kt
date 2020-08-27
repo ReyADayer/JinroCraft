@@ -21,7 +21,7 @@ object PlayerFactory {
         every { player.name } returns name
         every { player.uniqueId } returns uuid
         every { player.scoreboard = any() } returns Unit
-        every { player.sendMessage(any() as String) } returns Unit
+        every { player.sendMessage(any<String>()) } returns Unit
         return player
     }
 
