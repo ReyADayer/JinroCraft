@@ -22,6 +22,7 @@ class VoteScoreboard(private val plugin: JavaPlugin, private val server: Server)
 
     fun init() {
         result.clear()
+        updateSideBar()
         showVoteScore()
     }
 
