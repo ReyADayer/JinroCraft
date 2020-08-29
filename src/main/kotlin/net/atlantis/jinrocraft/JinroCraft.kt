@@ -29,6 +29,7 @@ import org.bukkit.plugin.java.annotation.plugin.Description
 import org.bukkit.plugin.java.annotation.plugin.Plugin
 import org.bukkit.plugin.java.annotation.plugin.author.Author
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 
 @Plugin(name = "JinroCraft", version = "1.1.2")
@@ -99,6 +100,7 @@ class JinroCraft : JavaPlugin() {
     }
 
     override fun onDisable() {
+        stopKoin()
     }
 
     private val myModule = module {

@@ -26,6 +26,7 @@ dependencies {
     compile(Dependencies.Koin.coreExt)
     compile(Dependencies.Json.core)
     testCompile(Dependencies.JUnit.core)
+    testCompile(Dependencies.Koin.test)
     testCompile(Dependencies.MockK.core)
 }
 

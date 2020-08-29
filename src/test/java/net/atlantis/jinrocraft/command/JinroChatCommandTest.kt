@@ -9,12 +9,14 @@ import org.bukkit.GameMode
 import org.bukkit.Server
 import org.bukkit.command.Command
 import org.bukkit.entity.Player
+import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import kotlin.reflect.full.primaryConstructor
@@ -35,6 +37,12 @@ internal class JinroChatCommandTest {
             startKoin {
                 modules(listOf(mockModule))
             }
+        }
+
+        @AfterAll
+        @JvmStatic
+        internal fun afterAll() {
+            stopKoin()
         }
     }
 

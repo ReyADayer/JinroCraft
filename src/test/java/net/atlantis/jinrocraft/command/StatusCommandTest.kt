@@ -7,10 +7,12 @@ import net.atlantis.jinrocraft.model.RoleService
 import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.command.Command
 import org.bukkit.entity.Player
+import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import kotlin.reflect.full.primaryConstructor
@@ -29,6 +31,12 @@ internal class StatusCommandTest {
             startKoin {
                 modules(listOf(mockModule))
             }
+        }
+
+        @AfterAll
+        @JvmStatic
+        internal fun afterAll() {
+            stopKoin()
         }
     }
 

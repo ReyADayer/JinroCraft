@@ -31,6 +31,7 @@ object Dependencies {
         val classpath = "org.koin:koin-gradle-plugin:$version"
         val core = "org.koin:koin-core:$version"
         val coreExt = "org.koin:koin-core-ext:$version"
+        val test = "org.koin:koin-test:$version"
     }
 
     object Json {
