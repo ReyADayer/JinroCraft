@@ -64,12 +64,12 @@ import org.koin.dsl.module
                 usage = "/<command>"
         ),
         Command(
-                name = PluginCommands.JC,
+                name = PluginCommands.JINRO_CHAT,
                 desc = "jinro chat command",
                 usage = "/<command>"
         ),
         Command(
-                name = PluginCommands.CO,
+                name = PluginCommands.COMING_OUT,
                 desc = "co command",
                 usage = "/<command>"
         ),
@@ -91,8 +91,8 @@ class JinroCraft : JavaPlugin() {
         initCommand(PluginCommands.GAME, GameCommand())
         initCommand(PluginCommands.STATUS, StatusCommand())
         initCommand(PluginCommands.ROLE, RoleCommand())
-        initCommand(PluginCommands.JC, JinroChatCommand())
-        initCommand(PluginCommands.CO, ComingOutCommand())
+        initCommand(PluginCommands.JINRO_CHAT, JinroChatCommand())
+        initCommand(PluginCommands.COMING_OUT, ComingOutCommand())
         initCommand(PluginCommands.VOTE, VoteCommand())
 
         scheduleAsyncRunnable(PassiveRunnable(), 20, 500)
