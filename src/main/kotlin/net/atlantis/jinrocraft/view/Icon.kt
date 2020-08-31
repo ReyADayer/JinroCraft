@@ -23,7 +23,7 @@ abstract class Icon {
         return resultItemStack
     }
 
-    fun getLore(): List<String> {
+    private fun getLore(): List<String> {
         val result = mutableListOf<String>()
         result.add("${ChatColor.DARK_GRAY}$description")
         return result

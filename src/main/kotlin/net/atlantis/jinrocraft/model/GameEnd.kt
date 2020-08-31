@@ -1,15 +1,18 @@
 package net.atlantis.jinrocraft.model
 
+import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.ext.getOnlineAlivePlayers
 import net.atlantis.jinrocraft.view.Title
 import org.bukkit.ChatColor
 import org.bukkit.Server
+import org.bukkit.entity.Player
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class GameEnd : KoinComponent {
     private val server: Server by inject()
     private val roleService: RoleService by inject()
+    private val pluginPreference: PluginPreference by inject()
 
     fun execute() {
         val result = result() ?: return
@@ -17,28 +20,32 @@ class GameEnd : KoinComponent {
         server.onlinePlayers.forEach {
             title.send(it)
         }
+        pluginPreference.gameStart = false
     }
 
     private fun result(): GroupType? {
         val players = server.getOnlineAlivePlayers()
-        val wereWolfs = players.filter { roleService.getRole(it) == RoleType.WEREWOLF }
+        val wereWolfs = players.filter { roleService.getRole(it)?.countType == CountType.WEREWOLF }
         if (wereWolfs.isEmpty()) {
-            val foxes = players.filter { roleService.getRole(it) == RoleType.FOX }
-            return if (foxes.isEmpty()) {
-                GroupType.CITIZENS
-            } else {
+            return if (isFoxesAlive(players)) {
                 GroupType.FOXES
+            } else {
+                GroupType.CITIZENS
             }
         }
-        val citizens = players.filterNot { listOf(RoleType.WEREWOLF, RoleType.FOX).contains(roleService.getRole(it)) }
+        val citizens = players.filter { roleService.getRole(it)?.countType == CountType.CITIZEN }
         if (citizens.size <= wereWolfs.size) {
-            val foxes = players.filter { roleService.getRole(it) == RoleType.FOX }
-            return if (foxes.isEmpty()) {
-                GroupType.WEREWOLVES
-            } else {
+            return if (isFoxesAlive(players)) {
                 GroupType.FOXES
+            } else {
+                GroupType.WEREWOLVES
             }
         }
         return null
+    }
+
+    private fun isFoxesAlive(players: List<Player>): Boolean {
+        val foxes = players.filter { roleService.getRole(it)?.countType == CountType.FOXES }
+        return foxes.isNotEmpty()
     }
 }

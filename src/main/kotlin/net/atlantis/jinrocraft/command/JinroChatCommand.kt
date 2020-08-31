@@ -3,7 +3,6 @@ package net.atlantis.jinrocraft.command
 import net.atlantis.jinrocraft.ext.getOnlineAlivePlayers
 import net.atlantis.jinrocraft.message.JinroMessage
 import net.atlantis.jinrocraft.model.RoleService
-import net.atlantis.jinrocraft.model.RoleType
 import org.bukkit.GameMode
 import org.bukkit.Server
 import org.bukkit.command.Command
@@ -16,15 +15,14 @@ class JinroChatCommand : BaseCommand() {
     private val roleService: RoleService by inject()
 
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
-        val roleType = roleService.getRole(player)
         if (player.gameMode != GameMode.SURVIVAL) {
             return false
         }
-
-        if (roleType == RoleType.WEREWOLF) {
+        val role = roleService.getRoleClass(player) ?: return false
+        if (role.canJinroChat) {
             val text = args[0] ?: return true
             server.getOnlineAlivePlayers()
-                    .filter { roleService.getRole(player) == RoleType.WEREWOLF }
+                    .filter { roleService.getRoleClass(player)?.canJinroChat == true }
                     .forEach {
                         JinroMessage().text(player, it, text)
                     }

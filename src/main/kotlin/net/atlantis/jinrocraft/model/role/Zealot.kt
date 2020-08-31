@@ -8,14 +8,13 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.koin.core.inject
 
-open class Werewolf : Role() {
-    override val name = "人狼"
+class Zealot : Role() {
+    override val name = "狂信者"
     override val description = """
-        |夜の間、攻撃によるダメージが2増加します。
+        |人狼に味方をする市民です。
+        |誰が人狼であるかが分かります。
     """.trimMargin()
     override val groupType = GroupType.WEREWOLVES
-
-    override val canJinroChat = true
 
     private val roleService: RoleService by inject()
 
@@ -26,12 +25,6 @@ open class Werewolf : Role() {
     }
 
     override fun onAttackedEntity(player: Player, targetEntity: Entity, event: EntityDamageByEntityEvent) {
-        val targetRoleType = roleService.getRole(targetEntity)
-        if (targetRoleType == RoleType.FOX) {
-            event.damage = 0.0
-        } else if (player.world.time > 18000L) {
-            event.damage += 2.0
-        }
     }
 
     override fun onShownStatus(player: Player) {

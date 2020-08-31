@@ -13,6 +13,9 @@ class VoteCommand : BaseCommand() {
     private val voteScoreboard: VoteScoreboard by inject()
 
     override fun onCommandByPlayer(player: Player, command: Command, label: String, args: CommandArgs): Boolean {
+        if (player.gameMode != GameMode.SURVIVAL) {
+            return false
+        }
         val selectedPlayerName = args[0] ?: return false
         val selectedPlayer = server.getPlayer(selectedPlayerName) ?: return false
         if (selectedPlayer.gameMode != GameMode.SURVIVAL) {

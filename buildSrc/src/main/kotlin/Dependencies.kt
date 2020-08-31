@@ -31,6 +31,7 @@ object Dependencies {
         val classpath = "org.koin:koin-gradle-plugin:$version"
         val core = "org.koin:koin-core:$version"
         val coreExt = "org.koin:koin-core-ext:$version"
+        val test = "org.koin:koin-test:$version"
     }
 
     object Json {
@@ -39,5 +40,10 @@ object Dependencies {
 
     object JUnit {
         val core = "org.junit.jupiter:junit-jupiter:5.5.2"
+    }
+
+    object MockK {
+        val version = "1.10.0"
+        val core = "io.mockk:mockk:$version"
     }
 }

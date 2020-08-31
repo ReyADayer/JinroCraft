@@ -1,29 +1,26 @@
 package net.atlantis.jinrocraft.model.role
 
 import net.atlantis.jinrocraft.model.GroupType
-import org.bukkit.Material
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
-import org.bukkit.inventory.ItemStack
 
-class Hunter : Role() {
-    override val name = "狩人"
+class WhisperMadman : Role() {
+    override val name = "ささやく狂人"
     override val description = """
-        |一定時間ごとに矢を3本入手します。
+        |人狼に味方をする市民です。
+        |人狼と会話することができます。
     """.trimMargin()
-    override val groupType = GroupType.CITIZENS
+    override val groupType = GroupType.WEREWOLVES
+
+    override val canJinroChat = true
 
     override fun onPassive(player: Player) {
-        if (player.inventory.firstEmpty() != -1) {
-            player.inventory.addItem(ItemStack(Material.ARROW, 3))
-        }
     }
 
     override fun onClickedEntity(player: Player, targetEntity: Entity) {
     }
 
     override fun onAttackedEntity(player: Player, targetEntity: Entity, event: EntityDamageByEntityEvent) {
-
     }
 }

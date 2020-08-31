@@ -5,12 +5,19 @@ import net.atlantis.jinrocraft.ext.getOnlineAlivePlayers
 import net.atlantis.jinrocraft.ext.getStringMetadata
 import net.atlantis.jinrocraft.ext.setStringMetadata
 import net.atlantis.jinrocraft.metadata.MetadataKeys
+import net.atlantis.jinrocraft.model.role.Role
+import org.bukkit.Server
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
+import kotlin.reflect.full.primaryConstructor
 
-class RoleService(private val plugin: JavaPlugin, private val pluginPreference: PluginPreference) {
+class RoleService(
+        private val plugin: JavaPlugin,
+        private val server: Server,
+        private val pluginPreference: PluginPreference
+) {
 
     fun reset() {
         pluginPreference.resetPlayerRole()
@@ -45,11 +52,11 @@ class RoleService(private val plugin: JavaPlugin, private val pluginPreference: 
     }
 
     fun getRoles(): String {
-        var result = "役職内訳 "
+        var result = "役職内訳"
         val roleSettings = pluginPreference.getRoleSettings()
         roleSettings.forEach { roleType, count ->
             if (count > 0) {
-                result += "${roleType.jpName}:$count"
+                result += " ${roleType.jpName}:$count"
             }
         }
         return result
@@ -83,5 +90,17 @@ class RoleService(private val plugin: JavaPlugin, private val pluginPreference: 
     fun clearSetting() {
         pluginPreference.resetRoleSetting()
         pluginPreference.roles = listOf()
+    }
+
+    fun getRolePlayers(roleType: RoleType): List<Player> {
+        return server.onlinePlayers.filter { getRole(it) == roleType }
+    }
+
+    fun getRoleClass(entity: Entity): Role? {
+        return getRoleClass(getRole(entity))
+    }
+
+    fun getRoleClass(roleType: RoleType?): Role? {
+        return roleType?.roleClass?.primaryConstructor?.call()
     }
 }
