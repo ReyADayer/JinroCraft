@@ -26,7 +26,6 @@ internal class ViewListenerTest {
         }
     }
 
-
     @Nested
     inner class WhenCoMenu {
         @BeforeEach
