@@ -6,7 +6,6 @@ plugins {
 
 group = "net.atlantis"
 version = "1.1.2"
-val pluginName = "JinroCraft"
 
 repositories {
     jcenter()
