@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft
 
 object PluginPermissions {
-    const val ADMIN = "JinroCraft.admin"
+    const val BASE = "JinroCraft"
+    const val ADMIN = "$BASE.admin"
 }

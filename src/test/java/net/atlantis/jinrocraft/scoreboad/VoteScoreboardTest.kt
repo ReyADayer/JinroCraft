@@ -5,8 +5,8 @@ import io.mockk.mockk
 import net.atlantis.jinrocraft.factory.ObjectiveFactory
 import net.atlantis.jinrocraft.factory.PlayerFactory
 import net.atlantis.jinrocraft.factory.ScoreFactory
+import net.atlantis.jinrocraft.factory.ServerFactory
 import net.atlantis.jinrocraft.factory.WorldFactory
-import org.bukkit.Server
 import org.bukkit.World
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -22,7 +22,7 @@ import java.util.*
 internal class VoteScoreboardTest {
     companion object {
         private val plugin = mockk<JavaPlugin>()
-        private val server = mockk<Server>()
+        private val server = ServerFactory.build()
         private val scoreboard = mockk<Scoreboard>()
         private val scoreboardManager = mockk<ScoreboardManager>()
         private val objective = ObjectiveFactory.build()
@@ -31,7 +31,6 @@ internal class VoteScoreboardTest {
         @JvmStatic
         internal fun beforeAll() {
             every { server.scoreboardManager } returns scoreboardManager
-            every { server.onlinePlayers } returns emptyList()
             every { scoreboardManager.newScoreboard } returns scoreboard
             every { scoreboard.registerNewObjective("vote", "vote", "投票") } returns objective
         }
