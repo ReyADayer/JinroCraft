@@ -5,16 +5,14 @@ import io.mockk.mockk
 import net.atlantis.jinrocraft.config.PluginPreference
 import net.atlantis.jinrocraft.factory.LocationFactory
 import net.atlantis.jinrocraft.factory.PlayerFactory
+import net.atlantis.jinrocraft.factory.ServerFactory
 import net.atlantis.jinrocraft.factory.WorldFactory
 import net.atlantis.jinrocraft.model.RoleService
 import org.bukkit.ChatColor
 import org.bukkit.GameMode
-import org.bukkit.Server
 import org.bukkit.entity.ArmorStand
-import org.bukkit.entity.Player
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.AsyncPlayerChatEvent
-import org.bukkit.event.player.PlayerRespawnEvent
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
@@ -28,7 +26,7 @@ import org.koin.dsl.module
 
 internal class PlayerListenerTest {
     companion object {
-        private val server = mockk<Server>()
+        private val server = ServerFactory.build()
         private val playerListener = PlayerListener()
         private val roleService = mockk<RoleService>()
         private val pluginPreference = mockk<PluginPreference>()
@@ -62,7 +60,6 @@ internal class PlayerListenerTest {
         val location = LocationFactory.build(world)
         every { player.location } returns location
         every { world.spawn<ArmorStand>(any(), any(), any()) } returns mockk()
-        every { server.onlinePlayers } returns emptyList()
         every { pluginPreference.gameStart = false } returns Unit
 
         val event = PlayerDeathEvent(player, emptyList(), 0, "Death Message")
@@ -74,7 +71,7 @@ internal class PlayerListenerTest {
     inner class WhenAlive {
         @BeforeEach
         fun setUp() {
-            every { player.gameMode } returns  GameMode.SURVIVAL
+            every { player.gameMode } returns GameMode.SURVIVAL
         }
 
         @Test
@@ -89,7 +86,7 @@ internal class PlayerListenerTest {
     inner class WhenDead {
         @BeforeEach
         fun setUp() {
-            every { player.gameMode } returns  GameMode.SPECTATOR
+            every { player.gameMode } returns GameMode.SPECTATOR
         }
 
         @Test
