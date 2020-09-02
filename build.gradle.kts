@@ -12,12 +12,14 @@ repositories {
     mavenCentral()
     maven(Dependencies.Spigot.repository)
     maven(Dependencies.SonaType.repository)
+    maven(Dependencies.ProtocolLib.repository)
 }
 
 dependencies {
     compile(Dependencies.Spigot.api)
     compileOnly(Dependencies.Spigot.annotations)
     kapt(Dependencies.Spigot.annotations)
+    compile(Dependencies.ProtocolLib.core)
     compile(Dependencies.Kotlin.stdlib)
     compile(Dependencies.Kotlin.reflect)
     compile(Dependencies.Rx.java)
