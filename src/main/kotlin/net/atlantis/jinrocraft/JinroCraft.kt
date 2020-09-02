@@ -1,5 +1,6 @@
 package net.atlantis.jinrocraft
 
+import com.comphenix.protocol.ProtocolLibrary
 import net.atlantis.jinrocraft.command.ComingOutCommand
 import net.atlantis.jinrocraft.command.GameCommand
 import net.atlantis.jinrocraft.command.JinroChatCommand
@@ -111,6 +112,7 @@ class JinroCraft : JavaPlugin() {
         single { CoScoreboard(get()) }
         single { VoteScoreboard(get(), get()) }
         single { RoleService(get(), get(), get()) }
+        single { ProtocolLibrary.getProtocolManager() }
     }
 
     private fun setupKoin() {

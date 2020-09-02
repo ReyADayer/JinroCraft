@@ -18,6 +18,12 @@ object Dependencies {
         val repository = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
     }
 
+    object ProtocolLib {
+        val version = "4.5.1"
+        val core = "com.comphenix.protocol:ProtocolLib:$version"
+        val repository = "http://repo.dmulloy2.net/nexus/repository/public/"
+    }
+
     object SonaType {
         val repository = "https://oss.sonatype.org/content/groups/public/"
     }
