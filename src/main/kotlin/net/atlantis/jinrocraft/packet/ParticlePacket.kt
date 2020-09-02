@@ -16,7 +16,7 @@ open class ParticlePacket private constructor(
         fun create(
                 location: Location,
                 particle: Particle,
-                dustOptions: Particle.DustOptions?
+                dustOptions: Particle.DustOptions? = null
         ): ParticlePacket {
             return if (particle == Particle.REDSTONE) {
                 ParticlePacket(location, particle, dustOptions)
