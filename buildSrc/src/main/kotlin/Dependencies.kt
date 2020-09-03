@@ -24,6 +24,13 @@ object Dependencies {
         val repository = "http://repo.dmulloy2.net/nexus/repository/public/"
     }
 
+    object BukkitExecutors {
+        val version = "1.1-SNAPSHOT"
+        val group = "com.comphenix.executors"
+        val module = "BukkitExecutors"
+        val core = "$group:$module:$version"
+    }
+
     object SonaType {
         val repository = "https://oss.sonatype.org/content/groups/public/"
     }
