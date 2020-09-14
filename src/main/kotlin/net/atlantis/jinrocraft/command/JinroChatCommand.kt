@@ -22,7 +22,7 @@ class JinroChatCommand : BaseCommand() {
         if (role.canJinroChat) {
             val text = args[0] ?: return true
             server.getOnlineAlivePlayers()
-                    .filter { roleService.getRoleClass(player)?.canJinroChat == true }
+                    .filter { roleService.getRoleClass(it)?.canJinroChat == true }
                     .forEach {
                         JinroMessage().text(player, it, text)
                     }
