@@ -79,3 +79,32 @@
 | 村人陣営 | 人狼、妖狐をすべて倒す       |
 | 人狼陣営 | 人狼の数が村人の数を上回ったとき |
 | 妖狐陣営 | 妖狐が最後まで生き残る       |
+
+# 開発
+
+## docker-composeのインストール
+
+### MacOSでの手順
+
+Ruby2.6.3をインストールしてください
+
+```
+brew install rbenv
+rbenv install 2.6.3
+```
+
+docker-composeをインストール
+```
+gem install docker-compose
+```
+
+## コンテナの起動
+
+コンテナを起動してください。
+
+```
+docker-compose build
+docker-compose up
+```
+
+コンテナ起動後、Minecraftでlocalhostに接続してください

@@ -1,0 +1,7 @@
+version: "3.2"
+services:
+  spigot:
+    build: .
+    command: java -Xmx2G -Xms2G -jar spigot-1.15.2.jar nogui &
+    ports:
+      - 25565:25565
