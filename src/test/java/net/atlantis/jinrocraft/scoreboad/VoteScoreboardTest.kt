@@ -33,6 +33,7 @@ internal class VoteScoreboardTest {
             every { server.scoreboardManager } returns scoreboardManager
             every { scoreboardManager.newScoreboard } returns scoreboard
             every { scoreboard.registerNewObjective("vote", "vote", "投票") } returns objective
+            every { scoreboard.resetScores("vote") } returns Unit
         }
     }
 

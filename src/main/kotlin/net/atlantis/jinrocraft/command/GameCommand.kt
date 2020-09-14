@@ -19,6 +19,7 @@ class GameCommand : BaseCommand() {
                 pluginPreference.gameStart = true
                 roleService.reset()
                 roleService.initRoles()
+                pluginPreference.syncRoles()
                 val world = server.getWorld("world") ?: return false
                 world.time = 0
                 true
