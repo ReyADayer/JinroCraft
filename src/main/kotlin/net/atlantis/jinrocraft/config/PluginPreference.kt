@@ -38,6 +38,12 @@ class PluginPreference(private val plugin: JavaPlugin, private val config: FileC
         set(Keys.ROLE_SETTING, null)
     }
 
+    fun syncRoles() {
+        val roleSettings = getRoleSettings()
+        val roleTypeKeys: List<String> = roleSettings.filter { it.value != 0 }.map { it.key.key }
+        roles = roleTypeKeys
+    }
+
     fun getRoleSettings(): Map<RoleType, Int> {
         val result = mutableMapOf<RoleType, Int>()
         RoleType.values().forEach {

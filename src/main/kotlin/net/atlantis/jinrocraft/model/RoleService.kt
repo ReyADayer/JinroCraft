@@ -81,10 +81,7 @@ class RoleService(
     fun setting(roleTypeKey: String, count: Int) {
         val roleType = RoleType.findByKey(roleTypeKey) ?: return
         pluginPreference.setRoleSetting(roleType, count)
-
-        val roleSettings = pluginPreference.getRoleSettings()
-        val roleTypeKeys: List<String> = roleSettings.filter { it.value != 0 }.map { it.key.key }
-        pluginPreference.roles = roleTypeKeys
+        pluginPreference.syncRoles()
     }
 
     fun clearSetting() {
