@@ -24,7 +24,10 @@ class VoteScoreboard(private val plugin: JavaPlugin, private val server: Server)
 
     fun init() {
         result.clear()
-        scoreboard.resetScores(TAG)
+        server.onlinePlayers.forEach {
+            val score = objective.getScore(it.name)
+            score.score = 0
+        }
         showVoteScore()
     }
 
